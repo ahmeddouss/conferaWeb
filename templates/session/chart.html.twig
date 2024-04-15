@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chart Session{% endblock %}
+{% block content %}
+<!--chart start-->
+
+ <div style="justify-content: center ;display: inline-block;align-items: center;margin: 30px">
+            <span class="info-title">Conference Name : </span><span class="info-details">Mobile Developpment</span>
+            <span class="info-title">Session Number : </span><span class="info-details">{{ sessions|length }}</span>
+             <a class="back-button" href="{{ path('app_session_index') }}">Back to list</a>
+ </div>
+
+<div class="chart">
+    <ul class="numbers">
+        <li><span>100%</span></li>
+        <li><span>50%</span></li>
+        <li><span>0%</span></li>
+    </ul>
+    <ul class="bars">
+        {% for session in sessions %}
+        <li><div style="height: {{ session.presencespent*3 }}px" class="bar" data-percentage="{{ session.presencespent }}"></div><span>{{ session.sessionname }}</span></li>
+        {% endfor %}
+    </ul>
+</div>
+<!--chart end-->
+
+<script type="text/javascript">
+    $(function(){
+        $('.bars li .bar').each(function(key, bar){
+            var percentage = $(this).data('percentage');
+            $(this).animate({
+                'height' : percentage + '%'
+            },1000);
+        });
+    });
+</script>
+
+{% endblock %}

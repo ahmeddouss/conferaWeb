@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Session List{% endblock %}
+
+{% block content %}
+
+<div style="justify-content: center ;display: inline-block;align-items: center;margin: 30px">
+                <span class="info-title">Conference Name : </span><span class="info-details">Mobile Developpment</span>
+                <span class="info-title">Session Number : </span><span class="info-details">{{ sessions|length }}</span>
+                <a href="{{ path('app_session_chart') }}" class="add-button">Dashboard </a>
+
+
+
+    <div class="table-wrapper">
+    <table class="my-table">
+        <thead>
+        <tr>
+            <th>Session Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Presence Number</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr onclick="location.href='{{ path('app_session_show', {'id': session.id}) }}';" style="cursor:pointer;">
+
+
+                <td>{{ session.sessionname }}</td>
+                <td>{{ session.starttime ? session.starttime|date('H:i') : '' }}</td>
+                <td>{{ session.endtime ? session.endtime|date('H:i') : '' }}</td>
+                <td>{{ session.presencenbr }}</td>
+                <td>
+                    <a class="edit-button" href="{{ path('app_session_edit', {'id': session.id}) }}">
+
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+
+                    </a>
+
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No Session Found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <div class="bottom-buttons">
+        <a href="" class="back-button">Back To Conference</a>
+        <a href="{{ path('app_session_new') }}" class="add-button">Create new</a>
+    </div>
+
+
+
+{% endblock %}

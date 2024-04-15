@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Session - {{ session.sessionname }} {% endblock %}
+
+{% block content %}
+<div style="display: flex;align-items: center;justify-content: center ;height: 400px">
+    <div class="centered-div">
+    <h1>Session</h1>
+
+    <table>
+        <tr>
+            <th>Session Name</th>
+            <td>{{ session.sessionname }}</td>
+        </tr>
+        <tr>
+            <th>Start Time</th>
+            <td>{{ session.starttime ? session.starttime|date('H:i') : '' }}</td>
+        </tr>
+        <tr>
+            <th>End Time</th>
+            <td>{{ session.endtime ? session.endtime|date('H:i') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Presence Number</th>
+            <td>{{ session.presencenbr }}</td>
+        </tr>
+        <tr>
+            <th>Topics Number</th>
+            <td>{{ topics|length }}</td>
+        </tr>
+    </table>
+
+    <div style="display: flex; justify-content: flex-end;text-align: right;width: 100%;margin-top:20px;margin-bottom: 20px ">
+
+        <a class="edit-button" href="{{ path('app_session_edit', {'id': session.id}) }}">
+            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+        </a>
+        {{ include('session/_delete_form.html.twig') }}
+    </div>
+        <a  style="margin-bottom: 10px" class="add-button" href="{{ path('app_topics_new' , {'id': session.id})}}">Add Topic</a>
+    </div>
+    <div class="separator"></div>
+    <div>
+        {{ include('topics/index_by_id.html.twig') }}
+    </div>
+</div>
+
+    <a class="back-button" href="{{ path('app_session_index') }}">Back to list</a>
+{% endblock %}
