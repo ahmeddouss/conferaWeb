@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logistic index{% endblock %}
+
+{% block content %}
+    <h1>Logistic index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Providedlog</th>
+                <th>Quantity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for logistic in logistics %}
+            <tr>
+                <td>{{ logistic.id }}</td>
+                <td>{{ logistic.providedlog }}</td>
+                <td>{{ logistic.quantity }}</td>
+                <td>
+                    <a href="{{ path('app_logistic_show', {'id': logistic.id}) }}">show</a>
+                    <a href="{{ path('app_logistic_edit', {'id': logistic.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_logistic_new') }}">Create new</a>
+{% endblock %}

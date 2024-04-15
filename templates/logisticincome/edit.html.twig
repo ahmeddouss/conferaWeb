@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Logisticincome{% endblock %}
+
+{% block content %}
+    <h1>Edit Logisticincome</h1>
+
+    {{ include('logisticincome/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_logisticincome_index') }}">back to list</a>
+
+    {{ include('logisticincome/_delete_form.html.twig') }}
+{% endblock %}
