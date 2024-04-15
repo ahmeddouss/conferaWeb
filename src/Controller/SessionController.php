@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
+use App\Repository\SponsorRepository;
 use App\Repository\TopicsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,10 +26,11 @@ class SessionController extends AbstractController
 
 
     #[Route('/front', name: 'app_front_index', methods: ['GET'])]
-    public function indexfront(SessionRepository $sessionRepository): Response
+    public function indexfront(SessionRepository $sessionRepository,SponsorRepository $sponsorRepository): Response
     {
         return $this->render('session/front.html.twig', [
             'sessions' => $sessionRepository->findAll(),
+            'sponsors' => $sponsorRepository->findAll(),
         ]);
     }
 
