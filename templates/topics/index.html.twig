@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Topics List{% endblock %}
+
+{% block content %}
+
+<div class="table-wrapper">
+    <table class="my-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Topicname</th>
+                <th>Speakername</th>
+                <th>Topicdescription</th>
+                <th>Idsession</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+            <tr onclick="location.href='{{ path('app_topics_show', {'id': topic.id}) }}'" style="cursor:pointer;">
+                <td>{{ topic.id }}</td>
+                <td>{{ topic.topicname }}</td>
+                <td>{{ topic.speakername }}</td>
+                <td>{{ topic.topicdescription }}</td>
+
+                <td>
+
+                    <a class="edit-button" href="{{ path('app_topics_edit', {'id': topic.id}) }}">  <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No Topics Found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a href="{{ path('app_topics_new' , {'id': session.id})}}">Create new</a>
+{% endblock %}
