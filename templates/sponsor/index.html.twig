@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsor index{% endblock %}
+
+{% block content %}
+    <h1>Sponsor index</h1>
+<div class="table-wrapper">
+    <table class="my-table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Numtel</th>
+                <th>Status</th>
+                <th>Budget</th>
+                <th>Cause</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sponsor in sponsors %}
+            <tr onclick="location.href='{{ path('app_sponsor_show', {'id': sponsor.id}) }}';" style="cursor:pointer;">
+                <td>{{ sponsor.id }}</td>
+                <td>{{ sponsor.nom }}</td>
+                <td>{{ sponsor.email }}</td>
+                <td>{{ sponsor.numtel }}</td>
+                <td>{{ sponsor.status }}</td>
+                <td>  {{
+                sponsor.status == 'accepted' ? sponsor.budget : sponsor.status == 'rejected' ?   '' 
+                }}
+               
+                </td>
+                <td>{{ sponsor.cause }}</td>
+                <td>
+                    
+                      <a class="edit-button" href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">
+
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    <a href="{{ path('app_sponsor_new') }}" class="add-button">Create new</a>
+{% endblock %}
