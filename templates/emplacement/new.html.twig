@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Emplacement{% endblock %}
+
+{% block step %}
+    <div class="step-bar">
+        <a class="step-button">Conference Details</a>
+        <a class="step-button">Sessions</a>
+        <a class="step-button">Topics</a>
+        <a class="step-button">Sponsoring</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Create new Emplacement</h1>
+
+    {{ include('emplacement/_form.html.twig') }}
+
+    <a class="back-button" href="{{ path('app_emplacement_index') }}">back to list</a>
+
+{% endblock %}

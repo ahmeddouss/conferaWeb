@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+{% block body %}
+    <h1>Edit Conference</h1>
+</div>
+    {{ include('conference/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="back-button" href="{{ path('app_conference_index') }}">back to list</a>
+   
+    {{ include('conference/_delete_form.html.twig') }}
+{% endblock %}
+{% endblock %}
+
