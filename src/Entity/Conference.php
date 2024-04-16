@@ -2,41 +2,90 @@
 
 namespace App\Entity;
 
-use App\Repository\ConferenceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity(repositoryClass: ConferenceRepository::class)]
+use Symfony\Component\Validator\Constraints as Assert;
+/**
+ * Conference
+ *
+ * @ORM\Table(name="conference", indexes={@ORM\Index(name="emplacement", columns={"emplacement"})})
+ * @ORM\Entity(repositoryClass=App\Repository\ConferenceRepository::class)
+ * 
+ */
 class Conference
 {
-    #[ORM\Column(name: "id", type: "integer", nullable: false)]
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
     private $id;
 
-    #[ORM\Column(name: "nom", type: "string", length: 20, nullable: false)]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Conference name cannot be empty")
+     * @Assert\Length(max=20, maxMessage="Conference name cannot be longer than {{ limit }} characters")
+     * @Assert\Regex(
+     *     pattern="/^\D.*$/",
+     *     message="Conference name cannot begin with a number"
+     * )
+     */
     private $nom;
 
-    #[ORM\Column(name: "date", type: "date", nullable: false)]
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=false)
+     * @Assert\NotBlank(message="Conference date cannot be empty")
+     * @Assert\GreaterThanOrEqual("today", message="Conference date should not be in the past")
+     */
     private $date;
 
-    #[ORM\Column(name: "sujet", type: "string", length: 30, nullable: false)]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sujet", type="string", length=30, nullable=false)
+     * @Assert\NotBlank(message="Conference subject cannot be empty")
+     */
     private $sujet;
 
-    #[ORM\Column(name: "budget", type: "float", precision: 10, scale: 0, nullable: false)]
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="budget", type="float", precision=10, scale=0, nullable=false)
+     * @Assert\NotBlank(message="Conference budget cannot be empty")
+     * @Assert\GreaterThanOrEqual(value=300, message="Conference budget must be at least {{ compared_value }}")
+     * @Assert\PositiveOrZero(message="Conference budget cannot be negative")
+     */
     private $budget;
 
-    #[ORM\Column(name: "typeConf", type: "string", length: 10, nullable: false, options: ["default" => "PUBLIC"])]
-    private $typeconf = 'PUBLIC';
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="typeConf", type="boolean", nullable=false)
+     */
+    private $typeconf;
 
-    #[ORM\Column(name: "image", type: "string", length: 255, nullable: false)]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     */
     private $image;
 
-    #[ORM\Column(name: "emplacement", type: "integer", nullable: false)]
+    /**
+ * @var \App\Entity\Emplacement
+ *
+ * @ORM\ManyToOne(targetEntity="Emplacement")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="emplacement", referencedColumnName="id")
+ * })
+ */
     private $emplacement;
-
-    #[ORM\Column(name: "organisateur", type: "integer", nullable: false)]
-    private $organisateur;
 
     public function getId(): ?int
     {
@@ -91,12 +140,12 @@ class Conference
         return $this;
     }
 
-    public function getTypeconf(): ?string
+    public function isTypeconf(): ?bool
     {
         return $this->typeconf;
     }
 
-    public function setTypeconf(string $typeconf): static
+    public function setTypeconf(bool $typeconf): static
     {
         $this->typeconf = $typeconf;
 
@@ -115,27 +164,17 @@ class Conference
         return $this;
     }
 
-    public function getEmplacement(): ?int
+    public function getEmplacement(): ?Emplacement
     {
         return $this->emplacement;
     }
 
-    public function setEmplacement(int $emplacement): static
+    public function setEmplacement(?Emplacement $emplacement): static
     {
         $this->emplacement = $emplacement;
 
         return $this;
     }
 
-    public function getOrganisateur(): ?int
-    {
-        return $this->organisateur;
-    }
 
-    public function setOrganisateur(int $organisateur): static
-    {
-        $this->organisateur = $organisateur;
-
-        return $this;
-    }
 }

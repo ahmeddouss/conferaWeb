@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emplacements{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <h1 class="mb-4">Emplacements List</h1>
+
+        <div class="table-wrapper">
+            <table class="my-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Gouvernourat</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Capacite</th>
+                        <th scope="col">Label</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emplacement in emplacements %}
+                        <tr onclick="location.href='{{ path('app_emplacement_show', {'id': emplacement.id}) }}';" style="cursor:pointer;">
+                            <td>{{ emplacement.gouvernourat }}</td>
+                            <td>{{ emplacement.ville }}</td>
+                            <td>{{ emplacement.capacite }}</td>
+                            <td>{{ emplacement.label }}</td>
+                            <td>
+                                <a class="edit-button" href="{{ path('app_emplacement_edit', {'id': emplacement.id}) }}">
+                                    <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No Emplacements found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Emplacement</a>
+        </div>
+         <div class="bottom-buttons">
+        
+        <a href="{{ path('app_conference_new') }}" class="add-button">Create new Conference</a>
+    </div>
+    </div>
+{% endblock %}
