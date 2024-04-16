@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Emplacement{% endblock %}
+
+{% block content %}
+    <h1>Edit Emplacement</h1>
+
+    {{ include('emplacement/_form.html.twig', {'button_label': 'Update'}) }}
+    <a class="back-button" href="{{ path('app_emplacement_index') }}">back to list</a>
+
+    {{ include('emplacement/_delete_form.html.twig') }}
+{% endblock %}
