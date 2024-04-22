@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% block body %}
+        <h1>Conference</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ conference.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Topic</th>
+                    <td>{{ conference.sujet }}</td>
+                </tr>
+                <tr>
+                    <th>Budget</th>
+                    <td>{{ conference.budget }}</td>
+                </tr>
+                <tr>
+                    <th>Private</th>
+                    <td>{{ conference.typeconf ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Emplacement</th>
+                    <td><a href="{{ path('emplacement_show', {'id': conference.emplacement.id}) }}">{{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</a></td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td><img style="width: 80px; height: 80px" src="{{ asset('images/' ~ conference.image) }}"></td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <a class="back-button" href="{{ path('app_conference_index') }}">back to list</a>
+
+        <a class="edit-button" href="{{ path('app_conference_edit', {'id': conference.id}) }}">
+            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+        </a>
+
+        <a class="generate-pdf-button" href="#" onclick="generatePdfForConference({{ conference.id }})">
+            <img src="{{ asset('img/pdf-svgrepo-com.svg') }}" alt="PDF">
+        </a>
+
+        {{ include('conference/_delete_form.html.twig') }}
+
+    {% endblock %}
+
+{% block javascripts %}
+    <script>
+        function generatePdfForConference(conferenceId) {
+            // Fetch conference details from the server
+            fetch(`/conference/` + conferenceId)
+                .then(response => {
+                    // Check if response is successful
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // Parse response as JSON
+                    return response.text();
+                })
+                .then(conference => {
+                    // Construct PDF content using conference details
+                    const pdfContent = `
+                        <h1>Conference Details</h1>
+                        <p><strong>Name:</strong> ${conference.nom}</p>
+                        <p><strong>Date:</strong> ${conference.date ? new Date(conference.date).toLocaleDateString() : 'N/A'}</p>
+                        <p><strong>Topic:</strong> ${conference.sujet}</p>
+                        <p><strong>Budget:</strong> ${conference.budget}</p>
+                        <p><strong>Private:</strong> ${conference.typeconf ? 'Yes' : 'No'}</p>
+                        <img src="${conference.image ? conference.image : 'placeholder.jpg'}" alt="Conference Image" style="max-width: 200px;">
+                    `;
+
+                    // Create a new window to display the PDF
+                    const pdfWindow = window.open('', '_blank');
+
+                    // Write PDF content to the new window
+                    pdfWindow.document.open();
+                    pdfWindow.document.write(pdfContent);
+                    pdfWindow.document.close();
+                })
+                .catch(error => {
+                    console.error('Error fetching conference details:', error);
+                    console.log('Response text:', error.response ? error.response.text() : 'N/A');
+                });
+        }
+    </script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<table>
+<tr>
+    <td>{{ form_label(form.topicname, "Topic Name") }}</td>
+    <td>
+        <input type="text"
+               name="{{  field_name(form.topicname) }}"
+               value="{{  field_value(form.topicname)  }}"
+               placeholder="Topic Name"
+               class="form-control">
+
+    </td>
+    <td>
+        <span class="error-message"> {{ form_errors(form.topicname) }}</span>
+    </td>
+</tr>
+<tr>
+    <td>{{ form_label(form.speakername, "Speaker Name") }}</td>
+    <td>
+        <input type="text"
+               name="{{  field_name(form.speakername) }}"
+               value="{{  field_value(form.speakername)  }}"
+               placeholder="Speaker Name"
+               class="form-control">
+
+    </td>
+    <td><span class="error-message"> {{ form_errors(form.speakername) }}</span></td>
+</tr>
+<tr>
+    <td>{{ form_label(form.topicdescription, "Topic Description") }}</td>
+
+    <td>
+    <textarea style="height: 80px ;max-width: 180px;border-radius: 10px" name="{{ field_name(form.topicdescription) }}"
+              placeholder="Topic Description"
+              class="form-control">{{ field_value(form.topicdescription) }}</textarea>
+
+
+    </td>
+    <td> <span class="error-message"> {{ form_errors(form.topicdescription) }}</span></td>
+</tr>
+</table>
+
+<div style="text-align: right;">
+    <button type="submit" class="add-button">{{ button_label|default('Save') }}</button>
+</div>
+
+{{ form_end(form) }}

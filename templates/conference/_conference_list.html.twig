@@ -1,0 +1,27 @@
+<tbody>
+    {% for conference in conferences %}
+        <tr onclick="location.href='{{ path('app_conference_show', {'id': conference.id}) }}';" style="cursor:pointer;">
+            <td>{{ conference.nom }}</td>
+            <td>{{ conference.date ? conference.date|date('Y-m-d') : '  ' }}</td>
+            <td>{{ conference.sujet }}</td>
+            <td>{{ conference.budget }}</td>
+            <td>{{ conference.typeconf ? 'Yes' : 'No' }}</td>
+            <td>
+                {% if conference.image %}
+                    <img src="{{ asset('images/' ~ conference.image) }}" style="max-width: 80px; max-height: 80px;" alt="Conference Image">
+                {% else %}
+                    No image available
+                {% endif %}
+            </td>
+            <td>
+                <a class="edit-button" href="{{ path('app_conference_edit', {'id': conference.id}) }}">
+                    <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                </a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">No Conferences found</td>
+        </tr>
+    {% endfor %}
+</tbody>

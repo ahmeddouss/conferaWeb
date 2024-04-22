@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Topics{% endblock %}
+
+{% block content %}
+    <h1>Topics</h1>
+
+    <table class="table" >
+        <tbody>
+            <tr>
+                <th>Topic Name</th>
+                <td>{{ topic.topicname }}</td>
+            </tr>
+            <tr>
+                <th>Speaker Name</th>
+                <td>{{ topic.speakername }}</td>
+            </tr>
+            <tr >
+                <th>Topic Description</th>
+                <td class="ee" style="max-width: 180px;">{{ topic.topicdescription }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+<div style="display: flex; justify-content: flex-end;text-align: right;width: 100%;margin-top:20px;margin-bottom: 20px ">
+    <a class="edit-button" href="{{ path('app_topics_edit', {'id': topic.id}) }}">
+        <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+    </a>
+    {{ include('topics/_delete_form.html.twig') }}
+</div>
+<a class="back-button" href="{{ path('app_session_index') }}">Back to Session List</a>
+
+
+
+
+{% endblock %}

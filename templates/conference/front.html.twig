@@ -1,0 +1,50 @@
+{% extends 'F_base.html.twig' %}
+
+
+
+{% block conference %}
+
+  <section class="articles">
+
+
+    {% for conference in conferences %}
+        <article id="{{ conference.id }}">
+    <div class="article-wrapper">
+        <figure>
+            <img src="{{ asset('images/' ~ conference.image) }}">
+        </figure>
+        <div class="article-body">
+            <h2>{{ conference.nom }}</h2>
+            <p>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</p>
+            <p>Location: {{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</p>
+            <p>Private: {{ conference.typeconf ? 'Yes' : 'No' }}</p>
+            <!-- Share on Facebook button -->
+            <button onclick="shareConferenceOnFacebook('{{ conference.nom }}', '{{ conference.date|date('Y-m-d') }}', '{{ conference.emplacement.gouvernourat }}', '{{ conference.emplacement.ville }}', '{{ conference.emplacement.label }}', '{{ conference.typeconf ? 'Yes' : 'No' }}')">Share on Facebook</button>
+        </div>
+    </div>
+</article>
+
+
+
+     {% endfor %}
+<script>
+function shareConferenceOnFacebook(name, date, gouvernourat, ville, label, private) {
+    // URL of the current page
+    var pageUrl =  'https://2184-196-237-224-59.ngrok-free.app';
+
+    // Text to be shared
+    var shareText = 'Check out this conference: ' + name + '\nDate: ' + date + '\nLocation: ' + gouvernourat + ', ' + ville + ', ' + label + '\nPrivate: ' + private;
+
+    // Open Facebook share dialog
+    FB.ui({
+        method: 'share',
+        href: pageUrl,
+        quote: shareText,
+    }, function(response){});
+}
+</script>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=748277620670258" nonce="YOUR_NONCE"></script>
+
+
+{% endblock %}

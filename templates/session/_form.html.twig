@@ -1,0 +1,62 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<table>
+    <tr>
+        <td>{{ form_label(form.sessionname, "Session Name") }}</td>
+        <td>
+            <input type="text"
+
+                   name="{{  field_name(form.sessionname) }}"
+                   value="{{  field_value(form.sessionname)  }}"
+                   placeholder="Session Name"
+                   class="form-control">
+
+        </td>
+        <td>
+            <span class="error-message"> {{ form_errors(form.sessionname) }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.starttime, "Start Time") }}</td>
+        <td>
+            <input type="time"
+
+                   name="{{  field_name (form.starttime)}}"
+                   value="{{ field_value(form.starttime)}}"
+                   class="form-control">
+
+        </td>
+        <td>
+            <span class="error-message" > {{ form_errors(form.starttime) }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.endtime, "End Time") }}</td>
+        <td>
+            <input type="time"
+
+                   name="{{  field_name( form.endtime )}}"
+                   value="{{ field_value(form.endtime)}}"
+                   class="form-control">
+
+        </td>
+        <td>
+            <span class="error-message"> {{ form_errors(form.endtime) }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.idconference, "Conference ID") }}</td>
+        <td>
+            <div class="col-sm-10">
+                {{ form_widget(form.idconference, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.idconference) }}
+            </div>
+            {{ form_errors(form.idconference) }}
+        </td>
+    </tr>
+</table>
+<div style="text-align: right;">
+    <button type="submit" class="add-button">{{ button_label|default('Save') }}</button>
+</div>
+
+
+{{ form_end(form) }}

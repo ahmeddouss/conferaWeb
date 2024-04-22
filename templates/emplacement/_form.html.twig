@@ -1,0 +1,41 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<table>
+    <tr>
+        <td>{{ form_label(form.gouvernourat, "Gouvernourat") }}</td>
+             <td>
+        {{ form_widget(form.gouvernourat, {'attr': {'class': 'form-control'}}) }}
+        <span class="error-message">{{ form_errors(form.gouvernourat) }}</span>
+            </td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.ville, "Ville") }}</td>
+        <td>
+    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+    <span class="error-message">{{ form_errors(form.ville) }}</span>
+</td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.capacite, "Capacite") }}</td>
+        <td>
+            {{ form_widget(form.capacite, {'attr': {'class': 'form-control'}}) }}
+            <span class="error-message">{{ form_errors(form.capacite) }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.label, "Label") }}</td>
+        <td>
+            {{ form_widget(form.label, {'attr': {'class': 'form-control'}}) }}
+            <span class="error-message">{{ form_errors(form.label) }}</span>
+        </td>
+    </tr>
+    {# Add more form fields as needed, with corresponding error handling #}
+</table>
+<div style="text-align: right;">
+    <button type="submit" class="add-button">{{ button_label|default('Save') }}</button>
+</div>
+
+
+
+{{ form_end(form) }}
+
+{{ include('emplacement/maps.html.twig') }}

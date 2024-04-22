@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Topics{% endblock %}
+
+{% block content %}
+    <h1>Edit Topics</h1>
+
+    {{ include('topics/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="back-button" href="{{ path('app_session_index') }}">Back to Session List</a>
+
+
+{% endblock %}

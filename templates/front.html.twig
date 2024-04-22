@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confera</title>
+    <link rel="icon" href="img/ConferaIcon.svg" type="image/x-icon">
+    <link  rel="stylesheet" href="{{ asset('css/Style.css') }}">
+
+</head>
+<body>
+<div class="wrapper">
+    <div class="sidebar">
+        <nav class="toolbar">
+            <img src="{{ asset('img/ConferaIcon.svg') }}" alt="appIcon"> <!-- app icon -->
+            <hr class="space-divider"> <!-- Horizontal line for space -->
+
+            <nav id="menu"> <!-- tool icons -->
+                <li><a href="index.html"><img src="{{ asset('img/infoIcon.svg') }}" alt="Home"> </a></li>
+                <li><a href="simple_page.html"><img src="{{ asset('img/ListIcon.svg') }}" alt="Page">  </a></li>
+                <li><a href="shortcodes.html"><img src="{{ asset('img/ProfileIcon.svg') }}" alt="Shortcodes"> </a></li>
+                <li><a href="https://www.google.com"><img src="{{ asset('img/SponsorIcon.svg') }}" alt="External Link">  </a></li>
+            </nav>
+        </nav>
+        <button class="logout-button"><img src="{{ asset('img/LogoutIcon.svg') }}" alt="Icon"></button>
+    </div>
+
+    <div class="main">
+        <header class="header">
+            <div class="title">Confera</div>
+            <div class="ProfileBox">
+                <div class="MaskGroup">
+                    <img class="ProfileImage" src="{{ asset('img/ProfileImage.svg') }}" alt="Profile Image">
+                    <div class="ProfileCord">
+                        <span>Mokded Shili</span><br>
+                        <span>Organisateur</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="playground" style="display: flex; justify-content: center;" >
+            <div class="Widget" style="display: flex; justify-content: center; width: 100%; height: 100%;" >
+                {% block content %}
+                {% endblock %}
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Add your main content here -->
+    </div>
+</div>
+</body>
+</html>
