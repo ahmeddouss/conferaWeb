@@ -31,7 +31,7 @@
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody  >
+                <tbody  id="conferenceTableBody">
                     {% for conference in conferences %}
                         <tr onclick="location.href='{{ path('app_conference_show', {'id': conference.id}) }}';" style="cursor:pointer;">
                             <td>{{ conference.nom }}</td>

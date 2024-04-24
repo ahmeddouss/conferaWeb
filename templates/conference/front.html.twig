@@ -8,43 +8,37 @@
 
 
     {% for conference in conferences %}
-        <article id="{{ conference.id }}">
-    <div class="article-wrapper">
-        <figure>
-            <img src="{{ asset('images/' ~ conference.image) }}">
-        </figure>
-        <div class="article-body">
-            <h2>{{ conference.nom }}</h2>
-            <p>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</p>
-            <p>Location: {{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</p>
-            <p>Private: {{ conference.typeconf ? 'Yes' : 'No' }}</p>
-            <!-- Share on Facebook button -->
-            <button onclick="shareConferenceOnFacebook('{{ conference.nom }}', '{{ conference.date|date('Y-m-d') }}', '{{ conference.emplacement.gouvernourat }}', '{{ conference.emplacement.ville }}', '{{ conference.emplacement.label }}', '{{ conference.typeconf ? 'Yes' : 'No' }}')">Share on Facebook</button>
-        </div>
-    </div>
-</article>
+            <article id="{{ conference.id }}">
+                <div class="article-wrapper">
+                    <figure>
+                        <img src="{{ asset('images/' ~ conference.image) }}">
+                    </figure>
+                    <div class="article-body">
+                        <h2>{{ conference.nom }}</h2>
+                        <p>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</p>
+                        <p>Location: {{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</p>
+                        <p>Private: {{ conference.typeconf ? 'Yes' : 'No' }}</p>
+                    </div>
+                </div>
+            </article>
+                    <div class="share-buttons" id="share-buttons">
+                        <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
 
-
-
+                        </div>
+                
      {% endfor %}
 <script>
-function shareConferenceOnFacebook(name, date, gouvernourat, ville, label, private) {
-    // URL of the current page
-    var pageUrl =  'https://2184-196-237-224-59.ngrok-free.app';
-
-    // Text to be shared
-    var shareText = 'Check out this conference: ' + name + '\nDate: ' + date + '\nLocation: ' + gouvernourat + ', ' + ville + ', ' + label + '\nPrivate: ' + private;
-
-    // Open Facebook share dialog
-    FB.ui({
-        method: 'share',
-        href: pageUrl,
-        quote: shareText,
-    }, function(response){});
-}
+    const title = encodeURIComponent('Article or Post Title Here');
+    document.querySelectorAll('.twitter').forEach((twitter, index) => {
+        const conference = document.querySelectorAll('.article-wrapper')[index];
+        const conferenceName = conference.querySelector('h2').innerText;
+        const conferenceDate = conference.querySelector('p:nth-child(2)').innerText;
+        const conferenceLocation = conference.querySelector('p:nth-child(3)').innerText;
+        const msg = encodeURIComponent(`Check out this conference: ${conferenceName}, Date: ${conferenceDate}, Location: ${conferenceLocation}`);
+        
+        twitter.href = `http://twitter.com/share?text=${msg}`;
+    });
 </script>
-
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=748277620670258" nonce="YOUR_NONCE"></script>
 
 
 {% endblock %}
