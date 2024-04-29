@@ -32,8 +32,15 @@ class SponsorType extends AbstractType
             ->add('budget', IntegerType::class, [
                 'data' => 0, // Set initial value to 0
             ])
-            ->add('cause', TextType::class, [
-                'data' => '', // Set initial value to an empty string
+            ->add('cause', ChoiceType::class, [
+                'choices' => [
+                    '' => '',
+                    'Logistic' => 'Logistic',
+                    'Financial' => 'Financial',
+                    'Personal' => 'Personal',
+                ],
+                'data' => '', // Set initial value to ''
+                'required' => false,
             ])
         ;
     }
