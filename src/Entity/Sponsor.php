@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: SponsorRepository::class)]
 class Sponsor
 {
@@ -20,7 +19,7 @@ class Sponsor
     #[Assert\NotBlank]
     #[Assert\Regex(
         pattern: '/^[a-zA-Z]*$/',
-        message: 'The value "{{ value }}" contains non characters.'
+        message: 'The value "{{ value }}" contains non-characters.'
     )]
     #[Assert\Length(max: 20)]
     private $nom;
@@ -34,15 +33,11 @@ class Sponsor
     #[ORM\Column(name: "numtel", type: "string", length: 8, nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Range(min: 10000000, max: 99999999)]
-
-   
-
     private $numtel;
 
     #[ORM\Column(name: "status", type: "string", length: 20, nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 20)]
-  
     #[Assert\Choice(choices: ["accepted", "rejected"])]
     private $status;
 
@@ -50,9 +45,8 @@ class Sponsor
     #[Assert\Type(type: "float")]
     private $budget;
 
-    #[ORM\Column(name: "cause", type: "string", length: 30, nullable: true)]
-    #[Assert\Length(max: 30)]
-
+    #[ORM\Column(name: "cause", type: "string", length: 9, nullable: true)]
+    // #[Assert\NotBlank]
     private $cause;
 
     public function getId(): ?int
@@ -68,7 +62,6 @@ class Sponsor
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -80,7 +73,6 @@ class Sponsor
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -92,7 +84,6 @@ class Sponsor
     public function setNumtel(string $numtel): static
     {
         $this->numtel = $numtel;
-
         return $this;
     }
 
@@ -104,7 +95,6 @@ class Sponsor
     public function setStatus(string $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -116,7 +106,6 @@ class Sponsor
     public function setBudget(?float $budget): static
     {
         $this->budget = $budget;
-
         return $this;
     }
 
@@ -128,7 +117,6 @@ class Sponsor
     public function setCause(?string $cause): static
     {
         $this->cause = $cause;
-
         return $this;
     }
 }
