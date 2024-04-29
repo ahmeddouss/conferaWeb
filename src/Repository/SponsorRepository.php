@@ -21,6 +21,24 @@ class SponsorRepository extends ServiceEntityRepository
         parent::__construct($registry, Sponsor::class);
     }
 
+    public function findAllSortedByBudget()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.budget', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countBygetAcceptedSponsorsBudgetSum()
+    {
+        return $this->createQueryBuilder('s')
+            ->select('SUM(s.budget)')
+            ->where('s.status = :status')
+            ->setParameter('status', 'accepted')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return Sponsor[] Returns an array of Sponsor objects
     //     */
