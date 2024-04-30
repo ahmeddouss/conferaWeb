@@ -1,12 +1,16 @@
 <!-- AIzaSyBKbAQafF9CzI3D1HJkRgwxWywnFK8oSgM-->
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKbAQafF9CzI3D1HJkRgwxWywnFK8oSgM&libraries=places&callback=initialize" async defer></script>
-<div>
+<div style="width: 50%;">
+        <div>
     <input id="searchInput" type="text" placeholder="Search for a location...">
     <button class="add-button" id="searchButton" onclick="searchLocation()">Search</button>
     <button class="add-button" id="selectButton" onclick="selectLocation()">Select</button>
+
+            </div>
+        <div id="map" style="width: 900px; height: 400px;"></div>
+    </div>
 </div>
-<div id="map" style="width: 946px; height: 400px;"></div>
 <script>
     var map;
     var markers = [];

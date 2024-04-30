@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Conference Details{% endblock %}
 {% block content %}
 
     {% block body %}
@@ -8,7 +8,7 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <th>Nom</th>
+                    <th>Name</th>
                     <td>{{ conference.nom }}</td>
                 </tr>
                 <tr>
@@ -21,14 +21,14 @@
                 </tr>
                 <tr>
                     <th>Budget</th>
-                    <td>{{ conference.budget }}</td>
+                    <td>{{ conference.budget }} DT</td>
                 </tr>
                 <tr>
                     <th>Private</th>
                     <td>{{ conference.typeconf ? 'Yes' : 'No' }}</td>
                 </tr>
                 <tr>
-                    <th>Emplacement</th>
+                    <th>Location</th>
                     <td><a href="{{ path('emplacement_show', {'id': conference.emplacement.id}) }}">{{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</a></td>
                 </tr>
                 <tr>
@@ -39,17 +39,17 @@
             </tbody>
         </table>
 
-        <a class="back-button" href="{{ path('app_conference_index') }}">back to list</a>
-
-        <a class="edit-button" href="{{ path('app_conference_edit', {'id': conference.id}) }}">
-            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
-        </a>
-
-        <a class="generate-pdf-button" href="#" onclick="generatePdfForConference({{ conference.id }})">
-            <img src="{{ asset('img/pdf-svgrepo-com.svg') }}" alt="PDF">
-        </a>
-
-        {{ include('conference/_delete_form.html.twig') }}
+     <!-- Buttons container -->
+        <div class="button-container">
+            <a class="back-button" href="{{ path('app_conference_index') }}">back to list</a>
+            <a class="edit-button" href="{{ path('app_conference_edit', {'id': conference.id}) }}">
+                <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+            </a>
+            <a class="generate-qrcode-button" href="{{ path('generate_qr_code', {'id': conference.id}) }}">
+             Generate QR Code
+             </a>
+            {{ include('conference/_delete_form.html.twig') }}
+        </div>
 
     {% endblock %}
 

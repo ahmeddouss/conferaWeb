@@ -3,30 +3,63 @@
 
 
 {% block conference %}
-
-  <section class="articles">
-
-
-    {% for conference in conferences %}
-            <article id="{{ conference.id }}">
-                <div class="article-wrapper">
-                    <figure>
-                        <img src="{{ asset('images/' ~ conference.image) }}">
-                    </figure>
-                    <div class="article-body">
-                        <h2>{{ conference.nom }}</h2>
-                        <p>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</p>
-                        <p>Location: {{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</p>
-                        <p>Private: {{ conference.typeconf ? 'Yes' : 'No' }}</p>
-                    </div>
-                </div>
-            </article>
-                    <div class="share-buttons" id="share-buttons">
-                        <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
-
-                        </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+    
+    <div class="container">
+        <div class="articles-container">
+            <section class="articles">
+                {% for conference in conferences %}
                 
-     {% endfor %}
+                    <article id="{{ conference.id }}">
+                        <div class="article-wrapper">
+                            <figure>
+                                <img src="{{ asset('images/' ~ conference.image) }}">
+                            </figure>
+                            <div class="share-buttons">
+                                <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
+                            </div>  
+                            <div class="article-body">
+                                <h2>{{ conference.nom }}</h2>
+                                <p>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</p>
+                                <p>Location: {{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</p>  
+                                
+                                <a  class="read-more">
+                                    Read more 
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>   
+                    </article>
+                    
+                    <div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Conference Details</h2>
+        <p id="articleDetails"></p>
+        <details open>
+            <summary>
+                Conference Details
+                
+            </summary>
+            <div  >
+                <div id="location">Location: {{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}</div>
+                <div id="private" >Private: {{ conference.typeconf ? 'Yes' : 'No' }}</div>
+                <div id="sujet">More Details About Conference:<br>  {{ conference.sujet }}</div>
+             </div>
+        </details>
+       
+    </div>
+</div>
+                     
+                {% endfor %}
+            </section>
+        </div>
+        <div class="calendar-container">
+            <div id="calendar-holder"></div>
+        </div>
+    </div>
 <script>
     const title = encodeURIComponent('Article or Post Title Here');
     document.querySelectorAll('.twitter').forEach((twitter, index) => {
@@ -39,6 +72,61 @@
         twitter.href = `http://twitter.com/share?text=${msg}`;
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 
+        <script>
+            window.onload = () => {
+                let calendarElt = document.querySelector("#calendar-holder")
+
+                let calendar = new FullCalendar.Calendar(calendarElt, {
+                    initialView: 'dayGridMonth', // Display only the days of the month
+                    locale: 'fr',
+                    timeZone: 'Europe/Paris',
+                    headerToolbar: {
+                        start: 'prev,next today',
+                        center: 'title',
+                        end: 'dayGridMonth,timeGridWeek'
+                    },
+                    events: {{ data|raw }},
+                    eventResizableFromStart: true
+                })
+
+                calendar.render()
+            }
+        </script>
+        <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var readMoreButtons = document.querySelectorAll(".read-more");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    readMoreButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            modal.style.display = "block";
+            // Retrieve and set the article details inside the modal
+            var articleTitle = this.parentElement.querySelector("h2").textContent;
+            var articleText = this.parentElement.querySelector("p").textContent;
+            document.getElementById("articleDetails").innerHTML = "<strong>" + articleTitle + "</strong><br>" + articleText;
+        });
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+</script>
 
 {% endblock %}

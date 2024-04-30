@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Emplacements{% endblock %}
+{% block title %}Locations{% endblock %}
 
 {% block content %}
 <form id="searchForm" action="{{ path('app_emplacement_index') }}" method="get">
@@ -48,20 +48,17 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">No Emplacements found</td>
+                            <td colspan="5">No Location found</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-            <div class="pagination-wrapper">
-            <!-- Pagination -->
-            <div class="pagination">
-                {{ knp_pagination_render(emplacements) | raw }}
-            </div>
-        </div>
+            <div class="pagination-container">
+    {% include '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig' with {'pagination': emplacements} %}
+</div>
         <div class="bottom-buttons">
-            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Emplacement</a>
+            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Location</a>
         </div>
          <div class="bottom-buttons">
         

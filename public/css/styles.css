@@ -608,3 +608,13 @@ th{
   justify-content: center;
   margin-top: 20px; /* Adjust margin as needed */
 }
+
+.button-container {
+  margin-top: 20px; /* Adjust as needed */
+  position: left; /* Align buttons to the left */
+}
+
+.back-button, .edit-button,.delete-button {
+  display: block;
+  margin-right: 10px; /* Adjust as needed */
+}
