@@ -48,7 +48,7 @@ class Conference
     /**
      * @var string
      *
-     * @ORM\Column(name="sujet", type="string", length=30, nullable=false)
+     * @ORM\Column(name="sujet", type="string", length=500, nullable=false)
      * @Assert\NotBlank(message="Conference subject cannot be empty")
      */
     private $sujet;
