@@ -1,21 +1,24 @@
+
+<div style="display: flex;">
+    <div style="width: 50%;">
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 <table>
     <tr>
-        <td>{{ form_label(form.gouvernourat, "Gouvernourat") }}</td>
-        <td>
-            {{ form_widget(form.gouvernourat, {'attr': {'class': 'form-control'}}) }}
-            <span class="error-message">{{ form_errors(form.gouvernourat) }}</span>
-        </td>
+        <td>{{ form_label(form.gouvernourat, "Gouverment") }}</td>
+             <td>
+        {{ form_widget(form.gouvernourat, {'attr': {'class': 'form-control'}}) }}
+        <span class="error-message">{{ form_errors(form.gouvernourat) }}</span>
+            </td>
     </tr>
     <tr>
-        <td>{{ form_label(form.ville, "Ville") }}</td>
+        <td>{{ form_label(form.ville, "City") }}</td>
         <td>
-            {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
-            <span class="error-message">{{ form_errors(form.ville) }}</span>
-        </td>
+    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+    <span class="error-message">{{ form_errors(form.ville) }}</span>
+</td>
     </tr>
     <tr>
-        <td>{{ form_label(form.capacite, "Capacite") }}</td>
+        <td>{{ form_label(form.capacite, "Capacity") }}</td>
         <td>
             {{ form_widget(form.capacite, {'attr': {'class': 'form-control'}}) }}
             <span class="error-message">{{ form_errors(form.capacite) }}</span>
@@ -30,7 +33,10 @@
     </tr>
     {# Add more form fields as needed, with corresponding error handling #}
 </table>
-<div style="text-align: right;">
+<div style="text-align: center;">
     <button type="submit" class="add-button">{{ button_label|default('Save') }}</button>
 </div>
+
 {{ form_end(form) }}
+ </div>
+{{ include('emplacement/maps.html.twig') }}

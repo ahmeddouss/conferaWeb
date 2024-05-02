@@ -20,6 +20,45 @@ class EmplacementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Emplacement::class);
     }
+    public function searchAndSort(string $searchQuery = null, string $sortBy = 'gouvernourat', string $sortOrder = 'asc')
+    {
+        $qb = $this->createQueryBuilder('e');
+        
+        // Add search condition if search query is provided
+        if ($searchQuery) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('e.gouvernourat', ':searchQuery'),
+                $qb->expr()->like('e.ville', ':searchQuery'),
+                $qb->expr()->like('e.label', ':searchQuery')
+            ))
+            ->setParameter('searchQuery', '%' . $searchQuery . '%');
+        }
+    
+        // Sorting by specified field
+        $qb->orderBy('e.' . $sortBy, $sortOrder);
+    
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function searchAndSortQuery($searchQuery, $sortBy, $sortOrder)
+    {
+        $queryBuilder = $this->createQueryBuilder('e');
+    
+        // Add search condition if search query is provided
+        if ($searchQuery) {
+            $queryBuilder->andWhere($queryBuilder->expr()->orX(
+                $queryBuilder->expr()->like('e.gouvernourat', ':searchQuery'),
+                $queryBuilder->expr()->like('e.ville', ':searchQuery'),
+                $queryBuilder->expr()->like('e.label', ':searchQuery')
+            ))
+            ->setParameter('searchQuery', '%' . $searchQuery . '%');
+        }
+    
+        // Add sorting condition
+        $queryBuilder->orderBy('e.' . $sortBy, $sortOrder);
+    
+        return $queryBuilder->getQuery();
+    }
 
 //    /**
 //     * @return Emplacement[] Returns an array of Emplacement objects
