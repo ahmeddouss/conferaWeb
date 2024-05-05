@@ -15,11 +15,9 @@
                             <figure>
                                 <img src="{{ asset('images/' ~ conference.image) }}">
                             </figure>
-                            <div>
-                            <div class="share-buttons" ">
+                            <div class="share-buttons">
                                 <a class="twitter" target="blank"><i class="fab fa-twitter"></i></a>
-                            </div> 
-                            </div> 
+                            </div>  
                             <div class="article-body">
                                 <h2>{{ conference.nom }}</h2>
                                 <p>{{ conference.date ? conference.date|date('Y-m-d') : '' }}</p>
