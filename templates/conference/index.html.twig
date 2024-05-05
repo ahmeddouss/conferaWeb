@@ -1,30 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <div class="container py-5">
+    <form id="searchForm" action="{{ path('app_conference_index') }}" method="get">
+        <input id="searchInput" type="text" name="q" placeholder="Search conferences" value="{{ searchQuery }}">
+    </form>
+    <form action="{{ path('app_conference_index') }}" method="get" class="sort-form">
+    <label for="sortBy" class="sort-label">Sort By:</label>
+    <select id="sortBy" name="sortBy" class="sort-select">
+        <option value="nom" {% if sortBy == 'nom' %}selected{% endif %}>Name</option>
+        <option value="date" {% if sortBy == 'date' %}selected{% endif %}>Date</option>
+    </select>
+    <label for="sortOrder" class="sort-label">Order:</label>
+    <select id="sortOrder" name="sortOrder" class="sort-select">
+        <option value="asc" {% if sortOrder == 'asc' %}selected{% endif %}>Ascending</option>
+        <option value="desc" {% if sortOrder == 'desc' %}selected{% endif %}>Descending</option>
+    </select>
+    <button type="submit" class="sort-button">Sort</button>
+</form>
+    <div id="searchResults" class="container py-5">
         <h1 class="mb-4">Conferences List</h1>
-
         <div class="table-wrapper">
             <table class="my-table">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Topic</th>
                         <th scope="col">Budget</th>
-                        <th scope="col">Pivate</th>
+                        <th scope="col">Private</th>
                         <th scope="col">Image</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  id="conferenceTableBody">
                     {% for conference in conferences %}
-                        <tr>
                         <tr onclick="location.href='{{ path('app_conference_show', {'id': conference.id}) }}';" style="cursor:pointer;">
                             <td>{{ conference.nom }}</td>
                             <td>{{ conference.date ? conference.date|date('Y-m-d') : '  ' }}</td>
-                            <td>{{ conference.sujet }}</td>
-                            <td>{{ conference.budget }}</td>
+                            <td>{{ conference.budget }} DT </td>
                             <td>{{ conference.typeconf ? 'Yes' : 'No' }}</td>
                             <td>
                                 {% if conference.image %}
@@ -35,28 +47,101 @@
                             </td>
                             <td>
                                 <a class="edit-button" href="{{ path('app_conference_edit', {'id': conference.id}) }}">
-
-                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
-
-                    </a>
+                                    <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                                </a>
+                            </td>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="8">No Conferences found</td>
+                            <td colspan="7">No Conferences found</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-         <div class="bottom-buttons">
         
-
-        <a href="{{ path('app_conference_new') }}" class="add-button">Create new Conference</a>
-    </div>
-<div class="bottom-buttons">
-            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Emplacement</a>
+        
+        <!-- Pagination wrapper -->
+        <div class="pagination-wrapper">
+            <!-- Pagination -->
+            <div class="pagination">
+                {{ knp_pagination_render(conferences) | raw }}
+            </div>
         </div>
+                
         
+        <div class="bottom-buttons">
+            <a href="{{ path('app_conference_new') }}" class="add-button">Create new Conference</a>
+        </div>
+        <div class="bottom-buttons">
+            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Location</a>
+        </div>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const conferenceTableBody = document.getElementById('conferenceTableBody');
+
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(searchForm);
+
+            fetch(searchForm.action + '?' + new URLSearchParams(formData))
+                .then(response => response.text())
+                .then(data => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const newTbody = tempDiv.querySelector('#conferenceTableBody');
+                    conferenceTableBody.innerHTML = newTbody.innerHTML;
+                })
+                .catch(error => console.error('Error fetching search results:', error));
+        });
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.trim();
+
+            if (query.length === 0) {
+                conferenceTableBody.innerHTML = ''; // Clear search results if search query is empty
+                return;
+            }
+
+            fetch(searchForm.action + '?q=' + query)
+                .then(response => response.text())
+                .then(data => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const newTbody = tempDiv.querySelector('#conferenceTableBody');
+                    conferenceTableBody.innerHTML = newTbody.innerHTML;
+                })
+                .catch(error => console.error('Error fetching search results:', error));
+        });
+    });
+</script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButton = document.getElementById('sortButton');
+            sortButton.addEventListener('click', function() {
+                const sortField = document.getElementById('sortField').value;
+                const sortOrder = document.getElementById('sortOrder').value;
+                sortConferences(sortField, sortOrder);
+            });
+        });
+
+        function sortConferences(field, order) {
+            // Send AJAX request to the backend to fetch sorted data
+            fetch(`/conference/sort?field=${field}&order=${order}`)
+                .then(response => response.text())
+                .then(data => {
+                    // Update conference list with sorted data
+                    document.getElementById('conferenceList').innerHTML = data;
+                })
+                .catch(error => console.error('Error fetching sorted data:', error));
+        }
+    </script>
+
+
 {% endblock %}

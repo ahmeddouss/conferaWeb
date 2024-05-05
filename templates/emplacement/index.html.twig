@@ -1,9 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Emplacements{% endblock %}
+{% block title %}Locations{% endblock %}
 
 {% block content %}
-    <div class="container py-5">
+<form id="searchForm" action="{{ path('app_emplacement_index') }}" method="get">
+        <input id="searchInput" type="text" name="q" placeholder="Search emplacements" value="{{ searchQuery }}">
+    </form>
+    <form action="{{ path('app_emplacement_index') }}" method="get" class="sort-form">
+    <label for="sortBy" class="sort-label">Sort By:</label>
+    <select id="sortBy" name="sortBy" class="sort-select">
+        <option value="gouvernourat" {% if sortBy == 'gouvernourat' %}selected{% endif %}>Gouverment</option>
+        <option value="capacite" {% if sortBy == 'capacite' %}selected{% endif %}>Capacity</option>
+    </select>
+    <label for="sortOrder" class="sort-label">Order:</label>
+    <select id="sortOrder" name="sortOrder" class="sort-select">
+        <option value="asc" {% if sortOrder == 'asc' %}selected{% endif %}>Ascending</option>
+        <option value="desc" {% if sortOrder == 'desc' %}selected{% endif %}>Descending</option>
+    </select>
+    <button type="submit" class="sort-button">Sort</button>
+</form>
+    <div id="searchResults" class="container py-5">
         <h1 class="mb-4">Emplacements List</h1>
 
         <div class="table-wrapper">
@@ -17,7 +33,7 @@
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="emplacementTableBody">
                     {% for emplacement in emplacements %}
                         <tr onclick="location.href='{{ path('app_emplacement_show', {'id': emplacement.id}) }}';" style="cursor:pointer;">
                             <td>{{ emplacement.gouvernourat }}</td>
@@ -32,19 +48,85 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">No Emplacements found</td>
+                            <td colspan="5">No Location found</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-
+            <div class="pagination-container">
+    {% include '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig' with {'pagination': emplacements} %}
+</div>
         <div class="bottom-buttons">
-            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Emplacement</a>
+            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Location</a>
         </div>
          <div class="bottom-buttons">
         
         <a href="{{ path('app_conference_new') }}" class="add-button">Create new Conference</a>
     </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const emplacementTableBody = document.getElementById('emplacementTableBody');
+
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(searchForm);
+
+            fetch(searchForm.action + '?' + new URLSearchParams(formData))
+                .then(response => response.text())
+                .then(data => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const newTbody = tempDiv.querySelector('#emplacementTableBody');
+                    emplacementTableBody.innerHTML = newTbody.innerHTML;
+                })
+                .catch(error => console.error('Error fetching search results:', error));
+        });
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.trim();
+
+            if (query.length === 0) {
+                emplacementTableBody.innerHTML = ''; // Clear search results if search query is empty
+                return;
+            }
+
+            fetch(searchForm.action + '?q=' + query)
+                .then(response => response.text())
+                .then(data => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const newTbody = tempDiv.querySelector('#emplacementTableBody');
+                    emplacementTableBody.innerHTML = newTbody.innerHTML;
+                })
+                .catch(error => console.error('Error fetching search results:', error));
+        });
+    });
+</script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortButton = document.getElementById('sortButton');
+            sortButton.addEventListener('click', function() {
+                const sortField = document.getElementById('sortField').value;
+                const sortOrder = document.getElementById('sortOrder').value;
+                sortEmplacement(sortField, sortOrder);
+            });
+        });
+
+        function sortEmplacement(field, order) {
+            // Send AJAX request to the backend to fetch sorted data
+            fetch(`/emplacement/sort?field=${field}&order=${order}`)
+                .then(response => response.text())
+                .then(data => {
+                    // Update conference list with sorted data
+                    document.getElementById('emplacementList').innerHTML = data;
+                })
+                .catch(error => console.error('Error fetching sorted data:', error));
+        }
+    </script>
 {% endblock %}
