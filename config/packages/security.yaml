@@ -1,47 +1,18 @@
 security:
-    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
     firewalls:
-        #        login:
-        #            pattern: ^/api/login
-        #            stateless: true
-        #            json_login:
-        #                username_path: email
-        #                check_path: /api/login_check # or api_login_check as defined in config/routes.yaml
-        #                success_handler: lexik_jwt_authentication.handler.authentication_success
-        #                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        #            custom_authenticator: App\Security\LoginAuthenticator
-        #            logout:
-        #                path: app_logout
-        #                # where to redirect after logout
-        #                # target: app_any_route
-        #
-        #            remember_me:
-        #                secret: '%kernel.secret%'
-        #                lifetime: 604800
-        #                path: /
-        #                always_remember_me: true
-        #
-        #        api:
-        #            pattern: ^/api
-        #            stateless: true
-        #            guard:
-        #                authenticators:
-        #                    - lexik_jwt_authentication.jwt_token_authenticator
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-
             form_login:
 
                 login_path: 'app_login'
@@ -52,9 +23,10 @@ security:
             entry_point: 'form_login'
             logout:
                 path: app_logout
-                success_handler: App\Security\LogoutListener
-                  # where to redirect after logout
-                # target: app_any_route
+                target: app_login
+
+
+            # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
@@ -68,17 +40,15 @@ security:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/adminlogin, roles: PUBLIC_ACCESS }
         - { path: ^/logadmin, roles: PUBLIC_ACCESS }
-
         - { path: ^/email, roles: PUBLIC_ACCESS }
         - { path: ^/forgotpass, roles: PUBLIC_ACCESS }
         - { path: ^/forgotpassemail, roles: PUBLIC_ACCESS }
         - { path: ^/connect/google, roles: PUBLIC_ACCESS }
-
         - { path: ^/back, roles: ROLE_ADMIN }
-
         - { path: ^/admin/profileupdate, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
         - { path: ^/users, roles: ROLE_ADMIN }
+
 
 when@test:
     security:

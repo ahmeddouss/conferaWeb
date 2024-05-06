@@ -21,7 +21,9 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use Symfony\Component\Security\Core\Security;
 
 class RegistrationController extends AbstractController
@@ -31,7 +33,7 @@ class RegistrationController extends AbstractController
      * @throws TransportExceptionInterface
      */
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer, UserRepository $userRepository): Response
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer, UserRepository $userRepository): Response
     {
         // Create a new User instance
         $user = new User();
@@ -74,8 +76,9 @@ class RegistrationController extends AbstractController
             }
 
             // Encode the plain password and set other user data
-            $user->setPassword(
-                $passwordEncoder->encodePassword($user, $password)
+            $hashedPassword = $passwordHasher->hashPassword(
+                $user,
+                $password
             );
             $user->setRoles(['ROLE_USER']);
 
@@ -99,7 +102,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/user/update', name: 'user_update', methods: ['GET', 'POST'])]
-    public function updateUser(Request $request, EntityManagerInterface $entityManager, Security $security, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function updateUser(Request $request, EntityManagerInterface $entityManager, Security $security, UserPasswordHasherInterface $passwordHasher): Response
     {
         // Retrieve the authenticated user
         $user = $security->getUser();
@@ -116,7 +119,7 @@ class RegistrationController extends AbstractController
             // Optionally, you can check if the password is changed and encode it
             if ($form->get('password')->getData()) {
                 $user->setPassword(
-                    $passwordEncoder->encodePassword($user, $form->get('password')->getData())
+                    $passwordHasher->hashPassword($user, $form->get('password')->getData())
                 );
             }
 
@@ -146,22 +149,24 @@ class RegistrationController extends AbstractController
      * @throws \Exception
      */
     #[Route('/forgotpassemail', name: 'forgotpassemail')]
-    public function forgotpassemail(Security $security, Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function forgotpassemail(Security $security, Request $request, MailerInterface $mailer, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $email = $request->request->get('email');
 
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
+        $userRepository = $entityManager->getRepository(User::class);
+        $user = $userRepository->findOneBy(['email' => $email]);
+
 
         if ($user) {
             // Generate a new password
             $newPassword = bin2hex(random_bytes(8)); // Change the length as needed
 
             // Encode and set the new password for the user
-            $encodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
+            $encodedPassword = $passwordHasher->hashPassword($user, $newPassword);
             $user->setPassword($encodedPassword);
 
             // Save the updated user entity to the database
-            $this->getDoctrine()->getManager()->flush();
+            $this->$entityManager->flush();
 
             // Use Symfony's Mailer component to send the email
             $email = (new Email())

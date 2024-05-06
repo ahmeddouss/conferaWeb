@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                 'placeholder' => 'Choose a role',
                 'invalid_message' => 'Please select a role!',
             ])
-            ->add("captcha",ReCaptchaType::class)
+
             ->add('username', TextType::class)
             ->add('register', SubmitType::class);
     }
