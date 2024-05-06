@@ -81,47 +81,6 @@ class ConferenceRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function search(?string $query): array
-    {
-        if (!$query) {
-            return $this->findAll(); // Return all conferences if no query is provided
-        }
-    
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.nom LIKE :query')
-            ->setParameter('query', '%'.$query.'%')
-            ->getQuery()
-            ->getResult();
-    }
-    public function searchAndSort(string $searchQuery = null, string $sortBy = 'nom', string $sortOrder = 'asc')
-    {
-        $qb = $this->createQueryBuilder('c');
-        
-        if ($searchQuery) {
-            $qb->andWhere('c.nom LIKE :searchQuery')
-                ->setParameter('searchQuery', '%' . $searchQuery . '%');
-        }
-
-        // Sorting
-        $qb->orderBy('c.' . $sortBy, $sortOrder);
-
-        return $qb->getQuery()->getResult();
-    }
-    public function searchAndSortQuery($searchQuery, $sortBy, $sortOrder)
-    {
-        $queryBuilder = $this->createQueryBuilder('c');
-
-        // Add search condition if search query is provided
-        if ($searchQuery) {
-            $queryBuilder->andWhere('c.nom LIKE :searchQuery')
-                         ->setParameter('searchQuery', '%' . $searchQuery . '%');
-        }
-
-        // Add sorting condition
-        $queryBuilder->orderBy('c.' . $sortBy, $sortOrder);
-
-        return $queryBuilder->getQuery();
-    }
 
     //    /**
     //     * @return Conference[] Returns an array of Conference objects
