@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expenses index{% endblock %}
+
+
+{% block step %}
+ {{ parent() }}
+ 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="step-bar">
+        <a href="{{ path('app_incomes_index') }}" class="add-button">Incomes</a>
+        <a href="{{ path('app_financialincomes_index') }}" class="add-button">Financial Incomes</a>
+        <a href="{{ path('app_logistic_index') }}" class="add-button">Logistics</a>
+        <a href="{{ path('app_estimatedincomes_index') }}" class="add-button">Estimated incomes</a>
+        <a href="{{ path('app_estimatedexpenses_index') }}" class="add-button">Estimated expenses</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Define background colors for each column */
+    .total-column {
+        background-color: #f0f0f0; /* Light gray */
+    }
+    
+    .exp-column {
+        background-color: #b3ffb3; /* Light green */
+    }
+
+    /* Adjust layout for chart and table */
+    .container {
+        display: flex;
+    }
+
+    .chart-container,
+    .table-wrapper {
+        flex: 1;
+        margin-right: 20px;
+    }
+</style>
+
+<h1>Expenses index</h1>
+
+<div class="container">
+    <!-- Chart container -->
+    <div class="chart-container">
+        <canvas id="myChart1" width="100" height="50"></canvas>
+    </div>
+
+    <!-- Table wrapper -->
+    <div class="table-wrapper">
+        <table class="my-table">
+            <thead>
+                <tr>
+                    
+                    <th>Onwhat</th>
+                    <th>Expammount</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set totalExp = 0 %}
+                {% for expense in expenses %}
+                    {% set totalExp = totalExp + expense.expammount %}
+                    <tr onclick="location.href='{{ path('app_expenses_show', {'id': expense.id}) }}';" style="cursor:pointer;">
+                       
+                        <td>{{ expense.onwhat }}</td>
+                        <td>{{ expense.expammount }}</td>
+                        <td>
+                            <a class="edit-button" href="{{ path('app_expenses_edit', {'id': expense.id}) }}">
+                                <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">No records found</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td class="total-column"></td>
+                    <td class="total-column">Total</td>
+                    <td class="exp-column">{{ totalExp }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="bottom-buttons">
+       <a href="{{ path('app_dash_index') }}" class="back-button">Dashboard</a>
+        <a href="{{ path('app_expenses_new') }}" class="add-button">Create new</a>
+
+        <a href="{{ path('app_expenses_export_pdf') }}" class="back-button">Download</a>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var chartData = {{ chartData|raw }}; // Retrieve chart data from PHP Controller
+            
+        var myChart1 = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: chartData.labels,
+                datasets: [{
+                    label: 'Expenses Amount',
+                    data: chartData.data,
+                    backgroundColor: [
+                        '#FFCCCC', // Light Red
+                        '#CCCCFF', // Light Blue
+                        '#CCFFCC', // Light Green
+                        '#FFD700', // Gold
+                        '#FFFFCC', // Pale Yellow
+                        '#E6E6FA', // Lavender
+                        '#FFB6C1', // Light Pink
+                        '#E0FFFF', // Light Cyan
+                        '#F0E0FF', // Light Lavender
+                        '#98FB98'  // Pale Green
+                    ],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

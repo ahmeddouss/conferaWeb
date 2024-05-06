@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financialincomes index{% endblock %}
+
+{% block step %}
+    <div class="step-bar">
+        <a href="{{ path('app_incomes_index') }}" class="add-button">Incomes</a>
+        <a href="{{ path('app_expenses_index') }}" class="add-button">Expenses</a>
+        <a href="{{ path('app_logistic_index') }}" class="add-button">Logistics</a>
+        <a href="{{ path('app_estimatedincomes_index') }}" class="add-button">Estimated incomes</a>
+        <a href="{{ path('app_estimatedexpenses_index') }}" class="add-button">Estimated expenses</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Financialincomes index</h1>
+
+    <div class="table-wrapper">
+        <table class="my-table">
+            <thead>
+                <tr>
+                    
+                    <th>Sponsorname</th>
+                    <th>Cashin</th>
+                    <th>Proof</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for financialincome in financialincomes %}
+                <tr onclick="location.href='{{ path('app_financialincomes_show', {'id': financialincome.id}) }}';" style="cursor:pointer;">
+                 
+                    <td>{{ financialincome.sponsorname }}</td>
+                    <td>{{ financialincome.cashin }}</td>
+                    <td>
+                        {% if financialincome.proof %}
+                            <a href="{{ asset('uploads/proofs/' ~ financialincome.proof) }}" download>Download Proof</a>
+                        {% else %}
+                            No proof available
+                        {% endif %}
+                    </td>
+                    <td>
+                       <a class="edit-button" href="{{ path('app_financialincomes_edit', {'id': financialincome.id}) }}">
+
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ path('app_financialincomes_new') }}">Create new</a>
+  
+{% endblock %}
+
+
+

@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incomes index{% endblock %}
+
+    
+
+
+{% block step %}
+    <div class="step-bar">
+        <a href="{{ path('app_expenses_index') }}" class="add-button">Expenses</a>
+        <a href="{{ path('app_financialincomes_index') }}" class="add-button">Financial Incomes</a>
+        <a href="{{ path('app_logistic_index') }}" class="add-button">Logistics</a>
+        <a href="{{ path('app_estimatedincomes_index') }}" class="add-button">Estimated incomes</a>
+        <a href="{{ path('app_estimatedexpenses_index') }}" class="add-button">Estimated expenses</a>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+{{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+<style>
+    /* Define background colors for each column */
+    .total-column {
+        background-color: #f0f0f0; /* Light gray */
+    }
+    
+    .exp-column {
+        background-color: #b3ffb3; /* Light green */
+    }
+
+    /* Adjust layout for chart and table */
+    .container {
+        display: flex;
+    }
+
+    .chart-container,
+    .table-wrapper {
+        flex: 1;
+        margin-right: 20px;
+    }
+</style>
+
+    <h1>Incomes index</h1>
+<div class="container">
+    <div class="chart-container">
+        <canvas id="myChart" width="100" height="50"></canvas>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="my-table">
+            <thead>
+                <tr>
+                  
+                    <th>Fromwhat</th>
+                    <th>Incammount</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% set totalInc = 0 %}
+            {% for income in incomes %}
+            {% set totalInc = totalInc + income.incammount %}
+                <tr onclick="location.href='{{ path('app_incomes_show', {'id': income.id}) }}';" style="cursor:pointer;">
+               
+                    <td>{{ income.fromwhat }}</td>
+                    <td>{{ income.incammount }}</td>
+                    <td>
+                        <a class="edit-button" href="{{ path('app_incomes_edit', {'id': income.id}) }}">
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td class="total-column"></td>
+                <td class="total-column">Total</td>
+                <td class="inc-column">{{ totalInc }}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    {#<a class="plus-button" href="{{ path('app_incomes_new') }}">
+        <img src="{{ asset('img/plusIcon.svg') }}" alt="Plus Icon">
+    </a>#}
+
+    <div class="bottom-buttons">
+       <a href="{{ path('app_dash_index') }}" class="back-button">Dashboard</a>
+        <a href="{{ path('app_incomes_new') }}" class="add-button">Create new</a>
+        <a href="{{ path('app_incomes_export_pdf') }}" class="back-button">Download</a>
+    </div>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chartData = {{ chartData|raw }}; // Retrieve chart data from PHP Controller
+             
+            
+            
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Income Amount',
+                        data: chartData.data,
+                        backgroundColor: [
+                            '#FFCCCC', // Light Red
+                            '#CCCCFF', // Light Blue
+                            '#CCFFCC', // Light Green
+                            '#FFD700', // Gold
+                            '#FFFFCC', // Pale Yellow
+                            '#E6E6FA', // Lavender
+                            '#FFB6C1', // Light Pink
+                            '#E0FFFF', // Light Cyan
+                            '#F0E0FF', // Light Lavender
+                            '#98FB98'  // Pale Green
+                            ],
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

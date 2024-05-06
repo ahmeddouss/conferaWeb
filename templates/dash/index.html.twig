@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block step %}
+    <div class="step-bar">
+        <a href="{{ path('app_expenses_index') }}" class="step-button">Expenses</a>
+        <a href="{{ path('app_incomes_index') }}" class="step-button">Incomes</a>
+       
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+
+    <div style="display: inline-block; text-align: center;">
+        <div style="display: inline-block">
+            <canvas id="ratioChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var Income = {{ totalIncomes }};
+        var Expenses = {{ totalExpenses }};
+        var ratioData = [Expenses, Income];
+        var ratioChartCtx = document.getElementById('ratioChart').getContext('2d');
+
+        var ratioChart = new Chart(ratioChartCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Expenses', 'Incomes'],
+                datasets: [{
+                    data: ratioData,
+                    backgroundColor: ['#ff9999', '#99ccff'],
+                }]
+            }
+        });
+    });
+</script>
+{% endblock %}

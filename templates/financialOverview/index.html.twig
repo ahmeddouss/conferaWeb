@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block title %}Financial Overview{% endblock %}
+{% block step %}
+    <div class="step-bar">
+        <a href="{{ path('app_estimatedincomes_index') }}" class="step-button">Extimated Expenses</a>
+        <a href="{{ path('app_estimatedexpenses_index') }}" class="step-button">Estimated Incomes</a>
+       
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Financial Overview</h1>
+
+
+    <div style="display: inline-block; text-align: center;">
+        <div style="display: inline-block">
+            <canvas id="pessimisticChart" width="300" height="300"></canvas>
+             <h2 style="margin-top: 10px;"> Pessimistic case</h2>
+        </div>
+        <div style="display: inline-block">
+            <canvas id="realisticChart" width="300" height="300"></canvas>
+             <h2 style="margin-top: 10px;"> Realistic case</h2>
+        </div>
+        <div style="display: inline-block">
+            <canvas id="optimisticChart" width="300" height="300"></canvas>
+             <h2 style="margin-top: 10px;"> Optimistic case</h2>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var pessimisticIncome = {{ totalPessimistic }};
+            var realisticIncome = {{ totalRealistic }};
+            var optimisticIncome = {{ totalOptimistic }};
+            
+            var pessimisticExpenses = {{ totalPessimisticExpenses }};
+            var realisticExpenses = {{ totalRealisticExpenses }};
+            var optimisticExpenses = {{ totalOptimisticExpenses }};
+            
+            var pessimisticData = [pessimisticExpenses, pessimisticIncome];
+            var realisticData = [realisticExpenses, realisticIncome];
+            var optimisticData = [optimisticExpenses, optimisticIncome];
+            
+            var pessimisticChartCtx = document.getElementById('pessimisticChart').getContext('2d');
+            var realisticChartCtx = document.getElementById('realisticChart').getContext('2d');
+            var optimisticChartCtx = document.getElementById('optimisticChart').getContext('2d');
+
+            var pessimisticChart = new Chart(pessimisticChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Expenses', 'Incomes'],
+                    datasets: [{
+                        data: pessimisticData,
+                        backgroundColor: ['#ff9999', '#99ccff'],
+                    }]
+                }
+            });
+
+            var realisticChart = new Chart(realisticChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Expenses', 'Incomes'],
+                    datasets: [{
+                        data: realisticData,
+                        backgroundColor: ['#ff9999', '#99ccff'],
+                    }]
+                }
+            });
+
+            var optimisticChart = new Chart(optimisticChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Expenses', 'Incomes'],
+                    datasets: [{
+                        data: optimisticData,
+                        backgroundColor: ['#ff9999', '#99ccff'],
+                    }]
+                }
+            });
+        });
+    </script>
+{% endblock %}

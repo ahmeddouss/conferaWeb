@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logisticincome{% endblock %}
+
+{% block content %}
+    <h1>Logisticincome</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ logisticincome.id }}</td>
+            </tr>
+            <tr>
+                <th>Logsponsorname</th>
+                <td>{{ logisticincome.logsponsorname }}</td>
+            </tr>
+            <tr>
+                <th>Logincomeqty</th>
+                <td>{{ logisticincome.logincomeqty }}</td>
+            </tr>
+            <tr>
+                <th>Logproof</th>
+                <td>{{ logisticincome.logproof }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="back-button" href="{{ path('app_logisticincome_index') }}">back to list</a>
+
+    <a href="{{ path('app_logisticincome_edit', {'id': logisticincome.id}) }}">edit</a>
+
+    {{ include('logisticincome/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Make Payment{% endblock %}
+
+{% block content %}
+    <div>
+        <div style="padding-top: 10%; text-align: center;"> <!-- Center aligning the content -->
+            {{ parent() }}
+
+            <img src="{{ asset('img/ConferaIcon.svg') }}" alt="Confera">
+
+            <h1>Welcome to our conference</h1>
+            <form action="/checkout" method="POST" style="margin-top: 20px;">
+                <button type="submit" class="step-button">CheckIn</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

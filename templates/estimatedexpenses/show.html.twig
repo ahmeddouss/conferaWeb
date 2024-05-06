@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estimatedexpenses{% endblock %}
+
+{% block content %}
+    <h1>Estimatedexpenses</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ estimatedexpense.id }}</td>
+            </tr>
+            <tr>
+                <th>Expensesway</th>
+                <td>{{ estimatedexpense.expensesway }}</td>
+            </tr>
+            <tr>
+                <th>Pessimisticexpenses</th>
+                <td>{{ estimatedexpense.pessimisticexpenses }}</td>
+            </tr>
+            <tr>
+                <th>Realisticexpenses</th>
+                <td>{{ estimatedexpense.realisticexpenses }}</td>
+            </tr>
+            <tr>
+                <th>Optimisticexpenses</th>
+                <td>{{ estimatedexpense.optimisticexpenses }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <a class="back-button" href="{{ path('app_estimatedexpenses_index') }}">Back to list</a>
+
+    <a href="{{ path('app_estimatedexpenses_edit', {'id': estimatedexpense.id}) }}">edit</a>
+
+    {{ include('estimatedexpenses/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Financialincomes{% endblock %}
+
+{% block content %}
+    <h1>Edit Financialincomes</h1>
+
+    {{ include('financialincomes/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_financialincomes_index') }}">back to list</a>
+
+    {{ include('financialincomes/_delete_form.html.twig') }}
+{% endblock %}

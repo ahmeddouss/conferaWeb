@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Expenses Report</div>
+    <table>
+        <thead>
+            <tr>
+                <th>On What</th>
+                <th>Expense Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.onwhat }}</td>
+                <td>{{ expense.expammount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="footer">Generated on {{ "now"|date("Y-m-d H:i:s") }}</div>
+</body>
+</html>

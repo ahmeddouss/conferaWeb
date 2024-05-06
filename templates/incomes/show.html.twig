@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incomes{% endblock %}
+
+{% block content %}
+    <h1>Incomes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ income.id }}</td>
+            </tr>
+            <tr>
+                <th>Fromwhat</th>
+                <td>{{ income.fromwhat }}</td>
+            </tr>
+            <tr>
+                <th>Incammount</th>
+                <td>{{ income.incammount }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <a class="back-button" href="{{ path('app_incomes_index') }}">Back to list</a>
+
+    <a href="{{ path('app_incomes_edit', {'id': income.id}) }}">edit</a>
+
+    {{ include('incomes/_delete_form.html.twig') }}
+{% endblock %}
