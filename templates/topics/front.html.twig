@@ -1,0 +1,18 @@
+
+{% extends 'F_base.html.twig' %}
+
+
+
+{% block topics %}
+{% for topic in topics %}
+    <li>
+        <h4 class="text-white mb-3">{{ topic.topicname  }}</h4>
+
+        <p class="text-white">{{ topic.topicdescription }}</p>
+
+        <div class="icon-holder">
+
+        </div>
+    </li>
+{% endfor %}
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Conference;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\sessionEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,13 +22,12 @@ class ConferenceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Conference::class);
     }
-
     public function search(?string $query): array
     {
         if (!$query) {
             return $this->findAll(); // Return all conferences if no query is provided
         }
-    
+
         return $this->createQueryBuilder('c')
             ->andWhere('c.nom LIKE :query')
             ->setParameter('query', '%'.$query.'%')
@@ -37,7 +37,7 @@ class ConferenceRepository extends ServiceEntityRepository
     public function searchAndSort(string $searchQuery = null, string $sortBy = 'nom', string $sortOrder = 'asc')
     {
         $qb = $this->createQueryBuilder('c');
-        
+
         if ($searchQuery) {
             $qb->andWhere('c.nom LIKE :searchQuery')
                 ->setParameter('searchQuery', '%' . $searchQuery . '%');
@@ -55,7 +55,7 @@ class ConferenceRepository extends ServiceEntityRepository
         // Add search condition if search query is provided
         if ($searchQuery) {
             $queryBuilder->andWhere('c.nom LIKE :searchQuery')
-                         ->setParameter('searchQuery', '%' . $searchQuery . '%');
+                ->setParameter('searchQuery', '%' . $searchQuery . '%');
         }
 
         // Add sorting condition
@@ -63,6 +63,24 @@ class ConferenceRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery();
     }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findOneConferenceForToday(): ?Conference
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0, 0);
+
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date = :today')
+            ->setParameter('today', $today)
+            ->orderBy('c.date', 'ASC') // or 'DESC' depending on your preference
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
     //    /**
     //     * @return Conference[] Returns an array of Conference objects

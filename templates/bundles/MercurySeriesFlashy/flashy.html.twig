@@ -1,0 +1,110 @@
+{% for message in app.flashes('mercuryseries_flashy_notification') %}
+    <script id="flashy-template" type="text/template">
+        <div class="flashy flashy--{{ message.type }}">
+            <p id="notif" class="flashy__body" href="#" target="_blank"></p>
+
+        </div>
+    </script>
+
+    <script>
+        flashy("{{ message.message }}", "{{ message.link }}");
+    </script>
+
+    <style>
+        .flashy {
+
+            box-shadow: 0px 1px 22.399999618530273px -4px #6171FA;
+            border-radius: 15px;
+            border: 1px  #e2e2e2;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            font-family: "SF Pro Display", sans-serif;
+            padding: 10px 20px;
+            align-items: center;
+            opacity: 85%;
+
+            font-weight: 400;
+            position: fixed;
+            top: 25px;
+            right: 45%;
+            font-size: 17px;
+            color: #fff;
+        }
+
+        .flashy--success {
+            background-color: #8EA87F;
+            color: #fff;
+        }
+
+
+        .flashy--warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .flashy--muted {
+            background: #eee;
+            color: #3a3a3a;
+            border: 1px  #e2e2e2;
+        }
+
+        .flashy--muted-dark {
+            background: #133259;
+            color: #e2e1e7;
+        }
+
+        .flashy--info a,
+        .flashy--primary-dark a {
+            color: #fff;
+        }
+
+        .flashy--error {
+            background: #E5475E;
+            color: #fff;
+        }
+
+        .flashy--primary {
+            background: #573e81;
+        }
+
+        .flashy--primary-dark {
+            background: linear-gradient(to right, #133259 30%, #0d233e);
+        }
+
+        .flashy--info {
+            background: #00baf3;
+        }
+
+        .flashy > ul {
+            padding-left: 15px;
+        }
+
+        .flashy > p:only-of-type {
+            margin-bottom: 0;
+        }
+
+        .flashy i {
+            margin-right: 8px;
+            position: relative;
+            top: 6px;
+        }
+
+        .flashy .flashy__body {
+            color: inherit;
+            margin:0;
+            font-family: "SF Pro Display", sans-serif;
+        }
+
+        @media only screen and (max-width: 1050px) {
+            .flashy {
+                text-align: center;
+                right: 0;
+                left: 50%;
+                width: 300px;
+                margin-left: -150px;
+            }
+        }
+    </style>
+{% endfor %}

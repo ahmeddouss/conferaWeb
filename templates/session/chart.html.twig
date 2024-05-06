@@ -1,38 +1,66 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Chart Session{% endblock %}
-{% block content %}
-<!--chart start-->
+{% block body %}
+    <!--chart start-->
+    <div  class="playground" style="justify-content: flex-start">
 
- <div style="justify-content: center ;display: inline-block;align-items: center;margin: 30px">
-            <span class="info-title">Conference Name : </span><span class="info-details">Mobile Developpment</span>
-            <span class="info-title">Session Number : </span><span class="info-details">{{ sessions|length }}</span>
-             <a class="back-button" href="{{ path('app_session_index') }}">Back to list</a>
- </div>
 
-<div class="chart">
-    <ul class="numbers">
-        <li><span>100%</span></li>
-        <li><span>50%</span></li>
-        <li><span>0%</span></li>
-    </ul>
-    <ul class="bars">
-        {% for session in sessions %}
-        <li><div style="height: {{ session.presencespent*3 }}px" class="bar" data-percentage="{{ session.presencespent }}"></div><span>{{ session.sessionname }}</span></li>
-        {% endfor %}
-    </ul>
-</div>
-<!--chart end-->
+        <div class="column">
 
-<script type="text/javascript">
-    $(function(){
-        $('.bars li .bar').each(function(key, bar){
-            var percentage = $(this).data('percentage');
-            $(this).animate({
-                'height' : percentage + '%'
-            },1000);
-        });
-    });
-</script>
 
+            <div class="Widget" style="margin-top: 20px">
+                <div class="centered-div">
+                    {% block content %}
+                        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script type="text/javascript">
+
+                            {{ gc_start(columnChart, 'chart') }}
+                            function printPng() {
+                                var downloadLink = document.createElement('a');
+                                downloadLink.href = {{ columnChart.name }}.getImageURI();
+                                downloadLink.download = 'chart.png';
+                                downloadLink.click();
+                            }
+                            document.getElementById('downloadButton').addEventListener('click', printPng);
+
+                            {{ gc_event(columnChart, 'select', 'selectOrg') }}
+                            function selectOrg () {
+                                var sessionId;
+
+                                sessionId = {{ columnChart.name }}.getSelection()[0].row;
+                                var test = {{ columnChart.name }};
+                                console.log(test)
+
+
+                                window.location.href = "/session/chart/"+sessionId;
+                                document.getElementById('playground').style.justifyContent = 'flex-start';
+                                window.scrollTo(0,document.body.scrollHeight);
+                                // document.getElementById('reeer').innerHTML += "<div ></div>";
+
+                            }
+
+                            {{ gc_end(columnChart) }}
+
+
+                        </script>
+                        <div >
+                            <span class="info-title">Conference Name : </span><span class="info-details">Mobile Developpment</span>
+                            <span class="info-title">Session Number : </span><span class="info-details">{{ sessions|length }}</span>
+                            <a class="back-button" href="{{ path('app_session_index') }}">Back to list</a>
+                            <button class="add-button" id="downloadButton">Download Chart</button>
+                        </div>
+
+
+
+                        <div id="chart"  ></div>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        {% block bottomContend%}
+        {% endblock %}
+    </div>
 {% endblock %}
+
+

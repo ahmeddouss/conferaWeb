@@ -1,0 +1,35 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<table>
+<tr>
+    <td>{{ form_label(form.uid, "Card UID") }}</td>
+    <td>
+        <input type="text"
+               style="color: #777788;"
+               name="{{ field_name(form.uid) }}"
+               value="{{ field_value(form.uid) }}"
+               placeholder="Invalid"
+               class="form-control"
+               readonly>
+
+    </td>
+    <td>
+        <span class="error-message"> {{ form_errors(form.uid) }}</span>
+    </td>
+</tr>
+<tr>
+    <td>{{ form_label(form.idparticipant, "Participant Username") }}</td>
+    <td>
+        <div class="col-sm-10">
+            {{ form_widget(form.idparticipant, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.idparticipant) }}
+        </div>
+        {{ form_errors(form.idparticipant) }}
+    </td>
+</tr>
+</table>
+<div style="text-align: right;">
+    <button type="submit" class="add-button">{{ button_label|default('Save') }}</button>
+</div>
+
+
+{{ form_end(form) }}

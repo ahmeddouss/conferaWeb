@@ -1,0 +1,19 @@
+{% extends 'uidcard/index.html.twig' %}
+
+
+
+{% block popover %}
+
+<div id="popup" class="popup">
+    <h1>Create new Uidcard</h1>
+
+    {{ include('uidcard/_form.html.twig') }}
+
+    <a class="back-button" onclick="closePopup()" href="{{ path('app_uidcard_index') }}">Close</a>
+
+
+</div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+{% endblock %}

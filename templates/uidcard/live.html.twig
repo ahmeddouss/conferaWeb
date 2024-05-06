@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+{% block title %}Live Session{% endblock %}
+
+{% block content %}
+<div class="container"  >
+    <h1 class="clock" id="clock"></h1>
+    <div class="red-live-circle" ></div>
+</div>
+
+    <p class="date">Date:    <a style="font-weight: 300" id="currentDate"></a></p>
+
+
+
+    <script>
+        // Get current date
+        var currentDate = new Date();
+
+        // Format date
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var formattedDate = currentDate.toLocaleDateString('en-US', options);
+
+        // Display date
+        document.getElementById('currentDate').textContent = formattedDate;
+    </script>
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            // Add leading zeros if necessary
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to display the clock immediately
+        updateClock();
+    </script>
+    <table>
+        <tr>
+            <th>Current Conference</th>
+            {% if conference is not none %}
+            <td>{{ conference.nom }}</td>
+            {% else %}
+                <td>---</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>Presence</th>
+
+            <td id="presenceNbr">
+                {% if session is not none %}
+
+                    {{ session.presencenbr}} / {{ place.capacite}}
+                {% else %}
+                    ---
+                {% endif %}
+            </td>
+
+        </tr>
+        <tr>
+
+            <th>Current Session</th>
+            {% if session is not none %}
+                <td>{{ session.sessionname}}</td>
+            {% else %}
+                <td>---</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>Location</th>
+            {% if conference is not none %}
+                <td>{{ place.label }}</td>
+            {% else %}
+                <td>---</td>
+            {% endif %}
+        </tr>
+
+    </table>
+
+{% endblock %}
+
+{% block sideContent %}
+    <div class="Widget" style="margin-left: 30px ;max-width: 500px">
+        <div class="centered-div">
+            <h1>Verify Presence </h1>
+            <div id="list" style="height: 300px;width: 400px; overflow-y: auto;" >
+                <div id="presence" class="PresenceIn" style="box-shadow: none;background-color: #0dcaf0">
+
+                    <div class="Contend-presence" >
+
+                        <p class ="Contend-presence-text">User Name</p>
+                        <p class ="Contend-presence-text">
+                            <span style=" font-size: 15px;  font-weight: 200;">Here you can follow all the users entries </span>
+                            <span style=" font-size: 15px; ">Time</span>
+                        </p>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        const eventSource = new EventSource("{{ mercure('http://192.168.1.13/rfid')|escape('js') }}");
+        eventSource.onmessage = event => {
+            if(JSON.parse(event.data).status==="in"){
+                document.getElementById('list').insertAdjacentHTML('afterbegin', ' <div id="presence" class="PresenceIn">' +
+                    '<img alt="status" src="{{ asset('img/status.svg') }}" style="width: 35px; height: 35px; margin-right: 30px; transform: rotate(180deg);">' +
+
+                    '<div class="Contend-presence" >' +
+
+                    '<p class ="Contend-presence-text">' + JSON.parse(event.data).username + ' </p>' +
+                    '<p class ="Contend-presence-text">' +
+                    '<span style=" font-size: 15px;  font-weight: 200;">Entered the session at </span>' +
+                    '<span style=" font-size: 15px; ">'+JSON.parse(event.data).time+'</span>' +
+                    '</p>' +
+
+                    '</div>' +
+                    '</div>');
+
+
+            }else if(JSON.parse(event.data).status==="out"){
+                var currentValue = parseInt(document.getElementById('presenceNbr').innerText);
+
+
+                var newValue = currentValue + 1;
+
+                document.getElementById('presenceNbr').innerText = newValue;
+                document.getElementById('list').insertAdjacentHTML('afterbegin', ' <div id="presence" class="PresenceIn" style="background-color: #E5475E">' +
+                    '<img alt="status" src="{{ asset('img/status.svg') }}" style="width: 35px; height: 35px; margin-right: 30px;">' +
+'<div class="Contend-presence" style="width:400px">'+
+                    '<div  style="display: flex; justify-content: space-between;width:250px ;  align-items: center;">' + // Added double quote here
+
+                    '<p class ="Contend-presence-text">' + JSON.parse(event.data).username + ' </p>' +
+
+                    '<p class ="Contend-presence-text" style="font-weight:200;font-size:12px;margin:0"> Time Spent :'+ JSON.parse(event.data).timeSpent + 'Min </p>' +
+                    '</div>'+
+                    '<p class ="Contend-presence-text">' +
+                    '<span style=" font-size: 15px;  font-weight: 200;">Left the session at </span>' +
+                    '<span style=" font-size: 15px; ">'+JSON.parse(event.data).time+'</span>' +
+                    '</p>' +
+
+                    '</div>' +
+                    '</div>');
+
+
+            }else {
+                window.location.href = "{{ path('app_uidcard_new') }}";
+            }
+
+
+
+        }
+
+    </script>
+
+{% endblock %}

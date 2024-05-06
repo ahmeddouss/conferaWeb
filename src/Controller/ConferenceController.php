@@ -71,27 +71,7 @@ class ConferenceController extends AbstractController
     ]);
     }
     
-    #[Route('/front', name: 'app_conference_front', methods: ['GET'])]
-    public function front(ConferenceRepository $conferenceRepository): Response
-    {
-        $conferecesCalendar = [];
-        $confereces = $conferenceRepository->findAll();
-        foreach ($confereces as $conferece) {
-            $conferecesCalendar[] = [
-                'id' => $conferece->getId(),
-                'start' => $conferece->getDate()->format('Y-m-d H:i:s'),
-                'title' => $conferece->getNom(),
-                'description' => $conferece->getSujet(),
-                // Add other fields as needed
-            ];
-        }
 
-        $data = json_encode($conferecesCalendar);
-        return $this->render('conference/front.html.twig', [
-            'conferences' => $conferenceRepository->findAll(),
-            'data' => $data
-        ]);
-    }
 
     #[Route('/new', name: 'app_conference_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UidcardRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 #[ORM\Entity(repositoryClass: UidcardRepository::class)]
 class Uidcard
@@ -22,6 +23,9 @@ class Uidcard
 
     #[ORM\Column(name: "status", type: "integer", nullable: false)]
     private $status = '0';
+
+    #[ORM\Column(name: "idSession", type: "integer", nullable: true)]
+    private $idsession;
 
     #[ORM\ManyToOne(targetEntity: "User")]
     #[ORM\JoinColumn(name: "idParticipant", referencedColumnName: "id")]
@@ -76,6 +80,18 @@ class Uidcard
     public function setIdparticipant(?User $idparticipant): static
     {
         $this->idparticipant = $idparticipant;
+
+        return $this;
+    }
+
+    public function getIdSession(): ?int
+    {
+        return $this->idsession;
+    }
+
+    public function setIdSession(?int $idsession): static
+    {
+        $this->idsession = $idsession;
 
         return $this;
     }

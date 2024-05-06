@@ -32,19 +32,30 @@ class TopicsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-       /**
-         * @return Topics[] Returns an array of Topics objects
-         */
-        public function findByExampleField($value): array
-       {
-           return $this->createQueryBuilder('t')
-              ->andWhere('t.idsession = :val')
-             ->setParameter('val', $value)
+    /**
+     * @return Topics[] Returns an array of Topics objects
+     */
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.idsession = :val')
+            ->setParameter('val', $value)
 
-                ->getQuery()
-                ->getResult()
+            ->getQuery()
+            ->getResult()
             ;
-        }
+    }
+
+    public function findBySession($session): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.idsession = :val.id')
+            ->setParameter('val', $session)
+
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     //    public function findOneBySomeField($value): ?Topics
     //    {
