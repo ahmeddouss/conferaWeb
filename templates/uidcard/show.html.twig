@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uidcard{% endblock %}
+
+{% block content %}
+    <h1>Uidcard</h1>
+<div class="table-wrapper">
+    <table class="my-table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ uidcard.id }}</td>
+            </tr>
+            <tr>
+                <th>Uid</th>
+                <td>{{ uidcard.uid }}</td>
+            </tr>
+            <tr>
+                <th>Currenttime</th>
+                <td>{{ uidcard.currenttime ? uidcard.currenttime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ uidcard.status }}</td>
+            </tr>
+            <tr>
+                <th>idsess</th>
+                <td>{{ uidcard.idsession }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <a href="{{ path('app_uidcard_index') }}">back to list</a>
+
+    <a href="{{ path('app_uidcard_edit', {'id': uidcard.id}) }}">edit</a>
+
+    {{ include('uidcard/_delete_form.html.twig') }}
+{% endblock %}

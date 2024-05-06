@@ -1,0 +1,660 @@
+body {
+  background: linear-gradient(180deg, #1C0A16 0%, #2D153F 100%);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+}
+.wrapper {
+  display: flex;
+  height: 100vh;
+  position: relative;
+
+}
+.playground {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  background: #F4F4FB;
+  box-shadow: 2px 2px 8.3px rgba(0, 0, 0, 0.14) inset;
+  border-radius: 13px;
+  padding: 30px;
+}
+.Widget {
+
+
+  flex-direction: column;
+  display: inline-block;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  padding: 25px 90px 40px 90px;
+
+
+  background: white;
+  box-shadow: 4px 4px 20px -8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+}
+
+.icon img {
+  width: 50px; /* Adjust the width of the icons as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add spacing between icons */
+}
+
+.title {
+  width: 427px;
+  color: white;
+  font-size: 35px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: italic;
+  font-weight: 600;
+
+}
+
+
+
+.main {
+  flex: 1 ;
+  flex-direction: column;
+  display: flex;
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 50px;
+  padding-right: 40px;
+}
+
+.header button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar {
+  padding: 20px 20px 0px 25px;
+
+
+}
+
+.space-divider {
+  margin: 40px 0px; /* Adjust margin as needed */
+  border: 10px; /* Remove default border */
+  /* Add top border */
+  opacity: 0; /* Adjust opacity as needed */
+}
+
+.sidebar .toolbar button {
+
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar .toolbar #menu li {
+  list-style-type: none;
+  margin-bottom: 33px;
+}
+
+.logout-button {
+  width: 34px; /* Set the width of the button */
+  height: 34px; /* Set the height of the button */
+  border-radius: 50%; /* Make the button circular */
+  border: none; /* Remove border */
+  background-color: #F3F4F9; /* Set background color */
+  color: #fff; /* Set text color */
+  cursor: pointer; /* Add cursor pointer */
+  display: flex; /* Use flexbox to center content */
+  justify-content: right; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  bottom: 30px;
+  position: absolute;
+}
+
+.logout-button img {
+  width: 19px; /* Set the width of the icon */
+  height: 19px; /* Set the height of the icon */
+}
+
+
+
+.ProfileBox {
+  width: 152px;
+  height: 40px;
+  box-shadow: 0px 4px 9.9px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 6px 10px;
+  background: #EBF4FF;
+  border-radius: 57px;
+}
+
+.MaskGroup {
+  display: flex;
+}
+
+.ProfileImage {
+  width: 37px;
+  height: 34px;
+  border-radius: 9999px;
+  padding-right: 8px;
+}
+
+.ProfileCord {
+  width: 86px;
+  height: 20px;
+}
+
+.ProfileCord span {
+  font-family: 'SF Pro Display', sans-serif;
+  color: black;
+  font-size: 12px;
+  margin-bottom: 0;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.ProfileCord span:last-child {
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+/* Style submit button */
+.btn-submit {
+  background-color: #0e2b5e;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 55px;
+  cursor: pointer;
+  width: 30%;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.btn-submit:hover {
+  background-color: #48a0e8;
+}
+
+/* Style error messages */
+.error-message {
+  color: red;
+  font-size: 18px;
+  margin-top: 5px;
+  font-family: 'SF Pro Display', sans-serif;
+}
+
+
+
+.table-wrapper {
+  border-radius: 14px;
+  overflow-y: scroll;
+  height: fit-content;
+  margin-top: 20px;
+  max-height: 50vh;
+  box-shadow: 2px 2px 8.3px rgba(0, 0, 0, 0.14) ;
+
+}
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.table-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.table-wrapper {
+  scrollbar-width: none;
+}
+
+.my-table {
+  border-collapse: collapse;
+  border-radius: 10px;
+
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  text-align: left;
+}
+
+.my-table th {
+  position: sticky;
+  top: 0px;
+  padding-left: 8px;
+  padding-right: 30px;
+  background-color: #36304A;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'SF Pro Display', sans-serif;
+  color: #FFFFFF;
+  text-align: left;
+  height: 49px;
+}
+
+.my-table td {
+  padding-left: 8px;
+  font-size: 17px;
+  font-family: 'SF Pro Display', sans-serif;
+  height: 49px;
+}
+
+.my-table tr:nth-child(even) {
+  background: #F5F5F5;
+}
+
+.my-table tr:hover {
+  background-color: #D1EDFC; /* Change la couleur de fond lors du survol */
+
+}
+.my-table tr:hover td {
+
+  color: #00AFFF; /* Change la couleur du texte lors du survol */
+}
+
+
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #464141;
+  font-family: 'SF Pro Display', sans-serif;
+  color: #FFFFFF;
+
+  text-decoration: none;
+  border-radius: 20px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.back-button:hover {
+  background-color: #676869; /* darker shade of blue on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* increase elevation on hover */
+}
+
+.step-button{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3A355A;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 20px;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+  margin: 15px;
+}
+.add-button {
+
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0078D4;
+  font-family: 'SF Pro Display', sans-serif;
+  color: #FFFFFF;
+  text-decoration: none;
+  border: #e0e0e0;
+  position: relative;
+  align-items: center;
+  border-radius: 20px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin:10px;
+}
+
+.add-button:hover {
+  background-color: #38a0ee; /* darker shade of blue on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* increase elevation on hover */
+}
+
+.bottom-buttons{
+  padding:20px 20px 0px 20px ;
+  display: flex;
+  justify-content: space-between;
+}
+.info td {
+  width: 50%;
+}
+.info{
+  width: 100%;
+  margin:20px 20px 0px 20px ;
+}
+
+.info-title{
+  color: #3E3838;
+  font-size: 17px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 700;
+
+  word-wrap: break-word
+}
+
+.info-details{
+  color: #665E5E;
+  font-size: 17px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  word-wrap: break-word
+}
+
+.step-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  margin-inline-start: 10px;
+}
+
+.form-control {
+  /* Add your custom styles here */
+  width: 100%; /* Example width */
+  padding: 3px; /* Example padding */
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 40px; /* Example border radius */
+  box-sizing: border-box; /* Example box-sizing */
+  background-color: #F5F8FF;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  font-style: normal;
+}
+.form-control::placeholder {
+  padding: 3px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200; /* Medium font weight */
+  font-size: 16px;
+  font-style: normal; /* Normal font style (not italic) */
+}
+h1{
+  font-family: 'SF Pro Display', sans-serif;
+  color: #3E3838;
+}
+
+/* Style for error fields */
+.form-control.error {
+  border-color: #ff0000; /* Red border color */
+}
+
+/* Style for error messages */
+.has-error .help-block {
+  color: #ff0000; /* Red text color */
+}
+.centered-div{
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+text{
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200; /* Medium font weight */
+  font-size: 16px;
+  font-style: normal; /* Normal font style (not italic) */
+}
+label{
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200; /* Medium font weight */
+  font-size: 16px;
+  font-style: normal; /* Normal font style (not italic) */
+  padding-right: 10px;
+}
+
+input{
+  width: 100%; /* Example width */
+  padding: 3px; /* Example padding */
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 40px; /* Example border radius */
+  box-sizing: border-box; /* Example box-sizing */
+  background-color: #F5F8FF;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  font-style: normal;
+}
+/* Style for the button */
+.delete-button {
+  padding: 8px;
+  border: none;
+  background-color: #c82333; /* Red color, you can change it */
+  color: white;
+  margin-left: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  /* Ensure the button is a flex container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect */
+.delete-button:hover {
+  background-color: #b61e2d; /* Darker red color */
+}
+
+/* Style for the image */
+.delete-button img {
+  width: 18px; /* Set the width of the image */
+  height: 18px; /* Set the height of the image */
+
+}
+
+.edit-button {
+  margin-left: 15px;
+  cursor: pointer; /* Add cursor pointer */
+  display: flex; /* Use flexbox to center content */
+  justify-content: right; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 8px;
+  border: none;
+  background-color: #4d60de; /* Red color, you can change it */
+  color: white;
+  font-size: 16px;
+width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  /* Ensure the button is a flex container */
+  align-items: center;
+}
+
+
+
+
+/* Hover effect */
+.edit-button:hover {
+  background-color: #2339c8; /* Darker red color */
+}
+
+/* Style for the image */
+.edit-button img {
+  width: 18px; /* Set the width of the image */
+  height: 18px; /* Set the height of the image */
+
+}
+
+.edit-icon{
+
+  width: 18px; /* Set the width of the image */
+  height: 18px; /* Set the height of the image */
+}
+
+td{
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200; /* Medium font weight */
+  font-size: 20px;
+  font-style: normal; /* Normal font style (not italic) */
+}
+
+th{
+  text-align: left;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 700; /* Medium font weight */
+  font-size: 20px;
+  font-style: normal; /* Normal font style (not italic) */
+}
+
+.generate-pdf-icon {
+  margin-left: 15px;
+  cursor: pointer; /* Add cursor pointer */
+  display: flex; /* Use flexbox to center content */
+  justify-content: right; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 8px;
+  border: none;
+  background-color: #4d60de; /* Red color, you can change it */
+  color: white;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  /* Ensure the button is a flex container */
+  align-items: center;
+}
+
+.sort-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sort-label {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.sort-select {
+  width: 150px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  background-color: #F5F8FF;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.sort-button {
+  padding: 8px 20px;
+  background-color: #0078D4;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 16px;
+}
+
+.sort-button:hover {
+  background-color: #38a0ee;
+}
+
+
+/* CSS for pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a,
+.pagination li span {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.pagination li a:hover,
+.pagination li.active a,
+.pagination li.active span {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.pagination .disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.button-container {
+  margin-top: 20px; /* Adjust as needed */
+  position: left; /* Align buttons to the left */
+}
+
+.back-button, .edit-button,.delete-button {
+  display: block;
+  margin-right: 10px; /* Adjust as needed */
+}
+
+
+.sort-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sort-label {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.sort-select {
+  width: 150px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  background-color: #F5F8FF;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.sort-button {
+  padding: 8px 20px;
+  background-color: #0078D4;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 16px;
+}
+
+.sort-button:hover {
+  background-color: #38a0ee;
+}

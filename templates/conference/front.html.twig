@@ -88,7 +88,17 @@
                         end: 'dayGridMonth,timeGridWeek'
                     },
                     events: {{ data|raw }},
-                    eventResizableFromStart: true
+                    eventResizableFromStart: true,
+                    eventClick: function(info) {
+                        // Open modal when event is clicked
+                        modal.style.display = "block";
+                        console.log(info.event.id)
+                        // Retrieve and set the event details inside the modal
+                        var eventTitle = info.event.title;
+                        var eventDate = info.event.start;
+                        var eventLocation = info.event.extendedProps.location;
+                        document.getElementById("articleDetails").innerHTML = "<strong>" + eventTitle + "</strong><br>Date: " + eventDate + "<br>Location: " + eventLocation;
+                    }
                 })
 
                 calendar.render()

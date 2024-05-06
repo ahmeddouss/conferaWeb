@@ -2,5 +2,39 @@
 
 
 
-{% block content %}
+{% block sessions %}
+    {% for session in sessions %}
+        <div class="col-lg-3">
+            <div class="service-item first-service" style="height: 200px">
+                <div class="icon"></div>
+                <h4>{{ session.sessionname }}</h4>
+                <p>Start from <a style="font-weight: bold"> {{  session.starttime ? session.starttime|date('H:i') : ''  }}</a>  To <a style="font-weight: bold">  {{ session.endtime ? session.endtime|date('H:i') : '' }} </a>. </p>
+                {% set topic_count = 0 %}
+                {% for topic in allTopics %}
+                    {% if topic.idsession.id == session.id %}
+                        {% set topic_count = topic_count + 1 %}
+                    {% endif %}
+                {% endfor %}
+                <div class="text-button">
+                    <a href="{{ path('app_front_show_by_id', {'id': session.id}) }}#section_3">{{ topic_count }} Topics <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block topics %}
+    {% for topic in topics %}
+        <li>
+            <h4 class="text-white mb-3">{{ topic.topicname  }}</h4>
+
+            <p class="text-white">{{ topic.topicdescription }}</p>
+
+            <div class="icon-holder">
+                <h4>{{ loop.index }}</h4>
+            </div>
+        </li>
+    {% endfor %}
+
+
 {% endblock %}

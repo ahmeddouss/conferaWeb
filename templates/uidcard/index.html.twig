@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users UIDs{% endblock %}
+
+{% block body %}
+
+
+        {% block popover %}
+        {% endblock %}
+
+    <script>
+        // Function to open the popup
+
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+    <div class="playground" >
+
+
+
+                <div class="Widget" >
+                    <div class="centered-div">
+                        <h1>Set Users UIDs</h1>
+                        <div class="table-wrapper">
+                            <table class="my-table" style="width: 900px">
+                                <thead>
+                                <tr>
+
+                                    <th>Username</th>
+                                    <th>Uid</th>
+                                    <th>Mail</th>
+                                    <th>Numtel</th>
+
+                                    <th>actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+
+                                        <td style="font-weight:700;color: #3E3838" >{{ user.username }}</td>
+
+
+
+                                        {% set test = 0 %}
+                                        {% for uidcard in uidcards %}
+
+                                            {% if uidcard.idparticipant == user and  test == 0 %}
+                                                {% set test = uidcard.uid %}
+                                                <td>
+
+
+                                                    {% if uidcard.uid | length == 8 %}
+                                                        <div class="pinType">
+                                                            <div class="E3124" > {{ uidcard.uid[:2] }}****{{ uidcard.uid[-2:] }}</div>
+                                                            <div class="Pin" style="color: #ffffff; font-size: 9px;  font-weight: 500;">PIN</div>
+                                                        </div>
+
+
+                                                    {% else %}
+
+                                                        <div class="pinType" style="background-color: #665E5E">
+                                                            <div class="E3124" style=""> {{ uidcard.uid[:2] }}****{{ uidcard.uid[-2:] }}</div>
+                                                            <div class="Pin" style="color: #fcfcfc; font-size: 9px;  font-weight: 500;">QR</div>
+                                                        </div>
+
+                                                    {% endif %}</td>
+
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if  test == 0 %}
+                                            <td></td>
+                                        {% endif %}
+
+                                        <td>{{ user.mail }}</td>
+
+
+
+                                        <td>{{ user.numtel }}</td>
+
+                                        <td>
+                                            {% if  test == 0 %}
+                                                <a  class="edit-button" href="{{ path('app_user_show', {'id': user.id}) }}">
+                                                    <img src="{{ asset('img/qr.svg') }}" alt="Edit Icon">
+                                                </a>
+                                            {% else %}
+                                                {{ include('uidcard/_delete_form.html.twig') }}
+                                            {% endif %}
+
+
+
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="10">no records found</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <script>
+                            const eventSource = new EventSource("{{ mercure('http://192.168.1.13/rfid')|escape('js') }}");
+                            eventSource.onmessage = event => {
+
+                                if(JSON.parse(event.data).status==="new"){
+                                    window.location.href = "/uidcard/new";
+
+                                }
+                                else {
+                                    window.location.href = "/uidcard/"+JSON.parse(event.data).username+" is "+JSON.parse(event.data).status;
+
+                                }
+
+                            }
+
+                        </script>
+
+                        {{ include('bundles/MercurySeriesFlashy/flashy.html.twig') }}
+
+                        <a class="add-button" href="{{ path('app_uidcard_live') }}">Go live</a>
+                    </div>
+
+
+
+                </div>
+
+
+{% endblock %}
