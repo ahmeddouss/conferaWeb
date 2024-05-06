@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Logisticincome{% endblock %}
+
+{% block content %}
+    <h1>Create new Logisticincome</h1>
+
+    {{ include('logisticincome/_form.html.twig') }}
+
+    <a href="{{ path('app_logisticincome_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Estimatedincomes{% endblock %}
+
+{% block content %}
+    <h1>Create new Estimatedincomes</h1>
+
+    {{ include('estimatedincomes/_form.html.twig') }}
+
+    <a href="{{ path('app_estimatedincomes_index') }}">back to list</a>
+{% endblock %}

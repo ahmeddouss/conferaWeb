@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estimatedexpenses index{% endblock %}
+
+{% block content %}
+    <h1>Estimatedexpenses index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expensesway</th>
+                <th>Pessimisticexpenses</th>
+                <th>Realisticexpenses</th>
+                <th>Optimisticexpenses</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for estimatedexpense in estimatedexpenses %}
+            <tr>
+                <td>{{ estimatedexpense.id }}</td>
+                <td>{{ estimatedexpense.expensesway }}</td>
+                <td>{{ estimatedexpense.pessimisticexpenses }}</td>
+                <td>{{ estimatedexpense.realisticexpenses }}</td>
+                <td>{{ estimatedexpense.optimisticexpenses }}</td>
+                <td>
+                    <a href="{{ path('app_estimatedexpenses_show', {'id': estimatedexpense.id}) }}">show</a>
+                    <a href="{{ path('app_estimatedexpenses_edit', {'id': estimatedexpense.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_estimatedexpenses_new') }}">Create new</a>
+{% endblock %}

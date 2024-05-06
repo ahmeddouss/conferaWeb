@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financialincomes{% endblock %}
+
+{% block content %}
+    <h1>Financialincomes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ financialincome.id }}</td>
+            </tr>
+            <tr>
+                <th>Sponsorname</th>
+                <td>{{ financialincome.sponsorname }}</td>
+            </tr>
+            <tr>
+                <th>Cashin</th>
+                <td>{{ financialincome.cashin }}</td>
+            </tr>
+            <tr>
+                <th>Proof</th>
+                <td>{{ financialincome.proof }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_financialincomes_index') }}">back to list</a>
+
+    <a href="{{ path('app_financialincomes_edit', {'id': financialincome.id}) }}">edit</a>
+
+    {{ include('financialincomes/_delete_form.html.twig') }}
+{% endblock %}

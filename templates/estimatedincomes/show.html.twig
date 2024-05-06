@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estimatedincomes{% endblock %}
+
+{% block content %}
+    <h1>Estimatedincomes</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ estimatedincome.id }}</td>
+            </tr>
+            <tr>
+                <th>Incomesource</th>
+                <td>{{ estimatedincome.incomesource }}</td>
+            </tr>
+            <tr>
+                <th>Pessimisticincome</th>
+                <td>{{ estimatedincome.pessimisticincome }}</td>
+            </tr>
+            <tr>
+                <th>Realisticincome</th>
+                <td>{{ estimatedincome.realisticincome }}</td>
+            </tr>
+            <tr>
+                <th>Optimisticincome</th>
+                <td>{{ estimatedincome.optimisticincome }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_estimatedincomes_index') }}">back to list</a>
+
+    <a href="{{ path('app_estimatedincomes_edit', {'id': estimatedincome.id}) }}">edit</a>
+
+    {{ include('estimatedincomes/_delete_form.html.twig') }}
+{% endblock %}

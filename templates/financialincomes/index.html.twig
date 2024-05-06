@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financialincomes index{% endblock %}
+
+{% block content %}
+    <h1>Financialincomes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sponsorname</th>
+                <th>Cashin</th>
+                <th>Proof</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for financialincome in financialincomes %}
+            <tr>
+                <td>{{ financialincome.id }}</td>
+                <td>{{ financialincome.sponsorname }}</td>
+                <td>{{ financialincome.cashin }}</td>
+                <td>{{ financialincome.proof }}</td>
+                <td>
+                    <a href="{{ path('app_financialincomes_show', {'id': financialincome.id}) }}">show</a>
+                    <a href="{{ path('app_financialincomes_edit', {'id': financialincome.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_financialincomes_new') }}">Create new</a>
+{% endblock %}

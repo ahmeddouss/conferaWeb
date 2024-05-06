@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Logistic{% endblock %}
+
+{% block content %}
+    <h1>Edit Logistic</h1>
+
+    {{ include('logistic/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_logistic_index') }}">back to list</a>
+
+    {{ include('logistic/_delete_form.html.twig') }}
+{% endblock %}
