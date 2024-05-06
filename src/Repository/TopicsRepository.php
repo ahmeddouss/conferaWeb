@@ -50,7 +50,7 @@ class TopicsRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.idsession = :val.id')
-            ->setParameter('val', $value)
+            ->setParameter('val', $session)
 
             ->getQuery()
             ->getResult()
