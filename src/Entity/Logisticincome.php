@@ -3,54 +3,83 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LogisticincomeRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Logisticincome
- *
- * @ORM\Table(name="logisticincome", indexes={@ORM\Index(name="logisticID", columns={"logisticID"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: LogisticincomeRepository::class)]
 class Logisticincome
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="logIncomeId", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $logincomeid;
+    #[ORM\Column(name: "logIncomeId", type: "integer", nullable: false)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    private $id;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="logSponsorName", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: "logSponsorName", type: "string", length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "The sponsor name cannot be empty")]
     private $logsponsorname;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="logIncomeQty", type="integer", nullable=true)
-     */
+    #[ORM\Column(name: "logIncomeQty", type: "integer", nullable: true)]
+    #[Assert\NotBlank(message: "The income quantity cannot be empty")]
+    #[Assert\Type(type: "integer", message: "The value must be an integer")]
     private $logincomeqty;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="logProof", type="blob", length=0, nullable=true)
-     */
+    #[ORM\Column(name: "logProof", type: "blob", nullable: true)]
     private $logproof;
 
-    /**
-     * @var \Logistic
-     *
-     * @ORM\ManyToOne(targetEntity="Logistic")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="logisticID", referencedColumnName="logisticID")
-     * })
-     */
+    #[ORM\ManyToOne(targetEntity: Logistic::class)]
+    #[ORM\JoinColumn(name: "logisticID", referencedColumnName: "logisticID")]
     private $logisticid;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
+    public function getLogsponsorname(): ?string
+    {
+        return $this->logsponsorname;
+    }
+
+    public function setLogsponsorname(?string $logsponsorname): self
+    {
+        $this->logsponsorname = $logsponsorname;
+
+        return $this;
+    }
+
+    public function getLogincomeqty(): ?int
+    {
+        return $this->logincomeqty;
+    }
+
+    public function setLogincomeqty(?int $logincomeqty): self
+    {
+        $this->logincomeqty = $logincomeqty;
+
+        return $this;
+    }
+
+    public function getLogproof()
+    {
+        return $this->logproof;
+    }
+
+    public function setLogproof($logproof): self
+    {
+        $this->logproof = $logproof;
+
+        return $this;
+    }
+
+    public function getLogistic(): ?int
+    {
+        return $this->logisticid;
+    }
+
+    public function setLogistic(int $logisticid): static
+    {
+        $this->logisticid = $logisticid;
+
+        return $this;
+    }
 }

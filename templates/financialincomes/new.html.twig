@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Financialincomes{% endblock %}
+
+{% block content %}
+    <h1>Create new Financialincomes</h1>
+
+    {{ include('financialincomes/_form.html.twig') }}
+
+    <a class="back-button" href="{{ path('app_financialincomes_index') }}">back to list</a>
+{% endblock %}

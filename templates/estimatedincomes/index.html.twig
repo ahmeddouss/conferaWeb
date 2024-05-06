@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estimatedincomes index{% endblock %}
+
+{% block step %}
+    <div class="step-bar">
+        <a href="{{ path('app_incomes_index') }}" class="add-button">Incomes</a>
+        <a href="{{ path('app_expenses_index') }}" class="add-button">Expenses</a>
+        <a href="{{ path('app_financialincomes_index') }}" class="add-button">Financial Incomes</a>
+        <a href="{{ path('app_logistic_index') }}" class="add-button">Logistics</a>
+   
+        <a href="{{ path('app_estimatedexpenses_index') }}" class="add-button">Estimated expenses</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Define background colors for each column */
+    .total-column {
+        background-color: #f0f0f0; /* Light gray */
+    }
+    
+    .pessimistic-column {
+        background-color: #ff9999; /* Light red */
+    }
+    
+    .realistic-column {
+        background-color: #99ccff; /* Light blue */
+    }
+    
+    .optimistic-column {
+        background-color: #b3ffb3; /* Light green */
+    }
+</style>
+    <h1>Estimatedincomes index</h1>
+
+    <div class="table-wrapper">
+        <table class="my-table">
+            <thead>
+                <tr>
+                   
+                    <th>Incomesource</th>
+                    <th>Pessimisticincome</th>
+                    <th>Realisticincome</th>
+                    <th>Optimisticincome</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set totalPessimistic = 0 %}
+                {% set totalRealistic = 0 %}
+                {% set totalOptimistic = 0 %}
+                {% for estimatedincome in estimatedincomes %}
+                    {% set totalPessimistic = totalPessimistic + estimatedincome.pessimisticincome %}
+                    {% set totalRealistic = totalRealistic + estimatedincome.realisticincome %}
+                    {% set totalOptimistic = totalOptimistic + estimatedincome.optimisticincome %}
+                    
+                    
+                    <tr onclick="location.href='{{ path('app_estimatedincomes_show', {'id': estimatedincome.id}) }}';" style="cursor:pointer;">
+                        
+                        <td>{{ estimatedincome.incomesource }}</td>
+                        <td>{{ estimatedincome.pessimisticincome }}</td>
+                        <td>{{ estimatedincome.realisticincome }}</td>
+                        <td>{{ estimatedincome.optimisticincome }}</td>
+                        <td>
+                            {#<a href="{{ path('app_estimatedincomes_show', {'id': estimatedincome.id}) }}">show</a>#}
+                            <a class="edit-button" href="{{ path('app_estimatedincomes_edit', {'id': estimatedincome.id}) }}">
+
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                        </a>
+                        </td>
+                    </tr>
+                     
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+    <tr>
+        <td class="total-column"></td>
+        <td class="total-column">Total</td>
+        <td class="pessimistic-column">{{ totalPessimistic }}</td>
+        <td class="realistic-column">{{ totalRealistic}}</td>
+        <td class="optimistic-column">{{ totalOptimistic }}</td>
+        <td></td>
+    </tr>
+            </tbody>
+        </table>
+    </div>
+
+   <div class="bottom-buttons">
+        <a href="{{ path('app_financialOverview_index') }}" class="back-button">Dashboard</a>
+        <a href="{{ path('app_estimatedexpenses_new') }}" class="add-button">Create new</a>
+    </div>
+{% endblock %}
+

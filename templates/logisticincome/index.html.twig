@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logisticincome index{% endblock %}
+
+{% block content %}
+    <h1>Logisticincome index</h1>
+
+    <div class="table-wrapper">
+        <table class="my-table">
+            <thead>
+                <tr>
+                  
+                    <th>Logsponsorname</th>
+                    <th>Logincomeqty</th>
+                    <th>Logproof</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for logisticincome in logisticincomes %}
+           
+                <tr>
+            
+                    <td>{{ logisticincome.logsponsorname }}</td>
+                    <td>{{ logisticincome.logincomeqty }}</td>
+                    <td>{{ logisticincome.logproof }}</td>
+                    <td>
+                        <a href="{{ path('app_logisticincome_show', {'id': logisticincome.id}) }}">show</a>
+                        <a href="{{ path('app_logisticincome_edit', {'id': logisticincome.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="bottom-buttons">
+       <a href="{{ path('app_logistic_index') }}" class="back-button">Back</a>
+        <a href="{{ path('app_logisticincome_new') }}" class="add-button">Create new</a>
+    </div>
+{% endblock %}
+
+

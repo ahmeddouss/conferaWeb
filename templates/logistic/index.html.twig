@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logistic index{% endblock %}
+
+{% block step %}
+    <div class="step-bar">
+        <a href="{{ path('app_expenses_index') }}" class="add-button">Expenses</a>
+        <a href="{{ path('app_incomes_index') }}" class="add-button">Incomes</a>
+        <a href="{{ path('app_financialincomes_index') }}" class="add-button">Financial Incomes</a>
+        <a href="{{ path('app_estimatedincomes_index') }}" class="add-button">Estimated incomes</a>
+        <a href="{{ path('app_estimatedexpenses_index') }}" class="add-button">Estimated expenses</a>
+
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h1>Logistic index</h1>
+
+    <div class="table-wrapper">
+        <table class="my-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Providedlog</th>
+                    <th>Quantity</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for logistic in logistics %}
+                <tr onclick="location.href='{{ path('app_logisticincome_index', {'LogisticID': logistic.id}) }}';" style="cursor:pointer;">
+                    <td>{{ logistic.id }}</td>
+                    <td>{{ logistic.providedlog }}</td>
+                    <td>{{ logistic.quantity }}</td>
+                    <td>
+                        
+                        <a class="edit-button" href="{{ path('app_logistic_edit', {'id': logistic.id}) }}">
+
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+
+                    </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ path('app_logistic_new') }}">Create new</a>
+{% endblock %}

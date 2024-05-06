@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     photo_dir: "%kernel.project_dir%/public/images"
+    proof_directory: '%kernel.project_dir%/public/uploads/proofs'
+    stripe_secret_key: 'sk_test_51PAapwLWTWqzZXJ4R91lV1zjd19S9uyY4gRloD8c1kwmoAS3XdveJTFPXBJUbgH7TCSrw3DUG4XWMwZl5jmM446s00y2QEuJTe'
 services:
     Knp\Bundle\PaginatorBundle\PaginatorBundle:
         public: true

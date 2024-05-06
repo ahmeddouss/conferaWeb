@@ -6,3 +6,23 @@ controllers:
 emplacement_show:
     path: \emplacement\{id}
     controller: App\Controller\EmplacementController::show
+
+app_payment:
+  path: /payment
+  controller: App\Controller\PaymentController::index
+  methods: GET
+
+checkout:
+  path: /checkout
+  controller: App\Controller\PaymentController::checkout
+  methods: POST
+
+success_url:
+  path: /success-url
+  controller: App\Controller\PaymentController::successUrl
+  methods: GET
+
+cancel_url:
+  path: /cancel-url
+  controller: App\Controller\PaymentController::cancelUrl
+  methods: GET
