@@ -57,6 +57,16 @@ class SessionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findByIdConf($idConf): array
+    {
+
+        return $this->createQueryBuilder('s')
+            ->andWhere(':idConference >= s.id')
+            ->setParameter('id', $idConf)
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Session[] Returns an array of Session objects
     //     */

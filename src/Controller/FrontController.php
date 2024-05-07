@@ -19,8 +19,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class FrontController extends AbstractController
 {
     #[Route('/', name: 'app_conference_front', methods: ['GET'])]
-    public function front(ConferenceRepository $conferenceRepository): Response
+    public function front(ConferenceRepository $conferenceRepository, SponsorRepository $sponsorRepository): Response
     {
+        $sponsors = $sponsorRepository->findAll();
         $conferecesCalendar = [];
         $confereces = $conferenceRepository->findAll();
         foreach ($confereces as $conferece) {
@@ -36,17 +37,65 @@ class FrontController extends AbstractController
         $data = json_encode($conferecesCalendar);
         return $this->render('conference/front.html.twig', [
             'conferences' => $conferenceRepository->findAll(),
-            'data' => $data
+            'data' => $data,
+            'sponsors' => $sponsors,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_front_show', methods: ['GET'])]
-    public function showFront(SessionRepository $sessionRepository, TopicsRepository $topicsRepository,SponsorRepository $sponsorRepository): Response
+    #[Route('conference/{id}', name: 'app_front_show_sess', methods: ['GET'])]
+    public function showFrontSession(ConferenceRepository $conferenceRepository,int $id,SessionRepository $sessionRepository, TopicsRepository $topicsRepository,SponsorRepository $sponsorRepository): Response
     {
-        $topics = $topicsRepository->findByExampleField(1);
+
+        $conferecesCalendar = [];
+        $confereces = $conferenceRepository->findAll();
+        foreach ($confereces as $conferece) {
+            $conferecesCalendar[] = [
+                'id' => $conferece->getId(),
+                'start' => $conferece->getDate()->format('Y-m-d H:i:s'),
+                'title' => $conferece->getNom(),
+                'description' => $conferece->getSujet(),
+                // Add other fields as needed
+            ];
+        }
+
+        $data = json_encode($conferecesCalendar);
+        $sessions=$sessionRepository->findByIdConf($id);
+        $topics = $topicsRepository->findBySessionId($sessions[0]->getId());
 
         return $this->render('session/front.html.twig', [
-            'sessions' => $sessionRepository->findAll(),
+            'conferences' => $conferenceRepository->findAll(),
+            'data' => $data,
+            'sessions' => $sessions,
+            'topics' => $topics,
+            'allTopics' => $topicsRepository->findAll(),
+            'sponsors' => $sponsorRepository->findAll(),
+        ]);
+    }
+
+    #[Route('session/{id}', name: 'app_front_show_topic', methods: ['GET'])]
+    public function showFrontTopic(ConferenceRepository $conferenceRepository,int $id,SessionRepository $sessionRepository, TopicsRepository $topicsRepository,SponsorRepository $sponsorRepository): Response
+    {
+
+        $conferecesCalendar = [];
+        $confereces = $conferenceRepository->findAll();
+        foreach ($confereces as $conferece) {
+            $conferecesCalendar[] = [
+                'id' => $conferece->getId(),
+                'start' => $conferece->getDate()->format('Y-m-d H:i:s'),
+                'title' => $conferece->getNom(),
+                'description' => $conferece->getSujet(),
+                // Add other fields as needed
+            ];
+        }
+
+        $data = json_encode($conferecesCalendar);
+        $sessions=$sessionRepository->findByIdConf($id);
+        $topics = $topicsRepository->findBySessionId($sessions[0]->getId());
+
+        return $this->render('session/front.html.twig', [
+            'conferences' => $conferenceRepository->findAll(),
+            'data' => $data,
+            'sessions' => $sessions,
             'topics' => $topics,
             'allTopics' => $topicsRepository->findAll(),
             'sponsors' => $sponsorRepository->findAll(),
@@ -59,14 +108,19 @@ class FrontController extends AbstractController
     #[Route('/presence', name: 'app_front_presence', methods: ['GET'])]
     public function showPresence(OpenWeatherMapService $openWeatherMapService, WeatherService $weatherService, UserRepository $userRepository, TopicsRepository $topicsRepository, EmplacementRepository $emplacementRepository,  SessionRepository $sessionRepository, UidcardRepository $uidcardRepository, ConferenceRepository $conferenceRepository): Response
     {
-
+        $participant=null;
+        $session=null;
+        $topics=null;
         $conference= $conferenceRepository->findOneConferenceForToday();
         $place = $conference->getEmplacement();
         $session =  $sessionRepository->findCurrentSession($conferenceRepository);
+        if ($session){
+            $participant= $uidcardRepository->getUniqueParticipantsBySession($session->getId());
+            $participant=$userRepository->getUsersByIds($participant);
+            $topics = $topicsRepository->findByExampleField($session->getId());
+        }
 
-        $participant= $uidcardRepository->getUniqueParticipantsBySession($session->getId());
-        $participant=$userRepository->getUsersByIds($participant);
-        $topics = $topicsRepository->findByExampleField($session->getId());
+
 
         $weather =$weatherService->getWeather( $openWeatherMapService->getCityGeoInfo($place->getGouvernourat()));
 

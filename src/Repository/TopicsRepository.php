@@ -24,8 +24,7 @@ class TopicsRepository extends ServiceEntityRepository
 
     public function findBySessionId(int $sessionId): array
     {
-        return $this->createQueryBuilder('t')
-            ->leftJoin('t.session', 's')
+        return $this->createQueryBuilder('s')
             ->andWhere('s.id = :sessionId')
             ->setParameter('sessionId', $sessionId)
             ->getQuery()

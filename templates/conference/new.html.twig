@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}New Conference{% endblock %}
+
 {% block step %}
     <div class="step-bar">
         <a class="step-button">Conference Details</a>
@@ -10,11 +11,10 @@
 {% endblock %}
 {% block content %}
 
-{% block body %}
+
     <h1>Create New Conference</h1>
     
     {{ include('conference/_form.html.twig') }}
 
     <a class="back-button" href="{{ path('app_conference_index') }}">back to list</a>
-{% endblock %}
 {% endblock %}
