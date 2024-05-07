@@ -1,37 +1,7 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<g>
-	<g>
-		<path d="M355.003,0H85.333v182.857H48.762V512h256v-36.571h158.476V108.236L355.003,0z M365.714,62.431l35.093,35.093h-35.093
-			V62.431z M268.19,475.429H85.333v-256H268.19V475.429z M426.667,438.857H304.762v-256H121.905V36.571h207.238v97.524h97.524
-			V438.857z"/>
-	</g>
-</g>
-<g>
-	<g>
-		<rect x="121.905" y="256" width="109.714" height="36.571"/>
-	</g>
-</g>
-<g>
-	<g>
-		<rect x="121.905" y="329.143" width="36.571" height="36.571"/>
-	</g>
-</g>
-<g>
-	<g>
-		<rect x="195.048" y="329.143" width="36.571" height="36.571"/>
-	</g>
-</g>
-<g>
-	<g>
-		<rect x="121.905" y="402.286" width="36.571" height="36.571"/>
-	</g>
-</g>
-<g>
-	<g>
-		<rect x="195.048" y="402.286" width="36.571" height="36.571"/>
-	</g>
-</g>
+<svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.82324 10.7571L21.1433 2.30859" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.5312 1L21.1432 2.30846L19.7992 5.78154" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21.9998 21.9999H17.7998V10.6922C17.7998 10.478 17.8883 10.2726 18.0458 10.1211C18.2033 9.96962 18.417 9.88452 18.6398 9.88452H21.1598C21.3826 9.88452 21.5963 9.96962 21.7539 10.1211C21.9113 10.2726 21.9998 10.478 21.9998 10.6922V21.9999Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.6004 21.9999H9.40039V13.1153C9.40039 12.9011 9.48889 12.6956 9.64643 12.5442C9.80394 12.3927 10.0176 12.3076 10.2404 12.3076H12.7604C12.9832 12.3076 13.1968 12.3927 13.3544 12.5442C13.5119 12.6956 13.6004 12.9011 13.6004 13.1153V21.9999Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.2 21.9999H1V15.5384C1 15.3242 1.0885 15.1187 1.24603 14.9673C1.40356 14.8158 1.61722 14.7307 1.84 14.7307H4.36C4.58278 14.7307 4.79645 14.8158 4.95396 14.9673C5.1115 15.1187 5.2 15.3242 5.2 15.5384V21.9999Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
