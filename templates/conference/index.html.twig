@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <form id="searchForm" action="{{ path('app_conference_index') }}" method="get">
+    <form class="searchForm" id="searchForm" action="{{ path('app_conference_index') }}" method="get">
         <input id="searchInput" type="text" name="q" placeholder="Search conferences" value="{{ searchQuery }}">
     </form>
     <form action="{{ path('app_conference_index') }}" method="get" class="sort-form">
