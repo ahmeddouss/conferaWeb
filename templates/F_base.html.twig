@@ -93,27 +93,13 @@
     </div>
 </div>
 
-
 <div class="projects section" id="projects">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <div class="section-heading">
                     <h2>Discover Our <em>Loyal</em>  <span>Sponsors</span></h2>
-                    <div class="line-dec">
-
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-12">
-
-
-                                    {% block sponsoring %}
-                                    {% endblock %}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="line-dec"></div>
 
                     <p>Thank you for your support</p>
                     <p>
@@ -121,8 +107,62 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                {% set acceptedSponsors = sponsors|filter(sponsor => sponsor.status == "accepted") %}
+
+                {% if acceptedSponsors|length < 4  and acceptedSponsors|length > 0 %}
+
+   <script>console.log({{ acceptedSponsors|length  }})</script>
+                <div style="display:flex;justify-content:center;" >
+                    {% for sponsor in sponsors %}
+                        {% if sponsor.status == "accepted" %}
+                            <div class="item" style="margin-left:60px;">
+                                <div class="project-item">
+                                    <img src="{{ asset('front/assets/images/project-01.jpg') }}" alt="">
+                                    <div class="text-content">
+                                        <h4>{{ sponsor.nom }}</h4>
+                                        <p>{{ sponsor.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
 
 </div>
+
+
+                {% else %}
+
+                <div class="owl-features owl-carousel">
+
+                    {% for sponsor in sponsors %}
+                        {% if sponsor.status == "accepted" %}
+                            <div class="item">
+                                <div class="project-item">
+                                    <img src="{{ asset('front/assets/images/project-01.jpg') }}" alt="">
+                                    <div class="text-content">
+                                        <h4>{{ sponsor.nom }}</h4>
+                                        <p>{{ sponsor.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -152,6 +192,35 @@
 
 
 
+<section class="timeline-section section-padding" id="section_3">
+    <div class="section-overlay"></div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 text-center">
+                <h2 class="text-white mb-4">This is the topics of the session you select</h2>
+            </div>
+
+            <div class="col-lg-10 col-12 mx-auto">
+                <div class="timeline-container">
+                    <ul class="vertical-scrollable-timeline" id="vertical-scrollable-timeline">
+                        <div class="list-progress">
+                            <div class="inner"></div>
+                        </div>
+                        {% block topics %}
+                        {% endblock %}
+
+
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
 
 
 
@@ -188,9 +257,8 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('front/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('front/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
 <script src="{{ asset('front/assets/js/isotope.min.js') }}"></script>
-<script src="{{ asset('front//js/owl-carousel.js') }}"></script>
+<script src="{{ asset('front/assets/js/owl-carousel.js') }}"></script>
 <script src="{{ asset('front/assets/js/tabs.js') }}"></script>
 <script src="{{ asset('front/assets/js/popup.js') }}"></script>
 <script src="{{ asset('front/assets/js/tester.js') }}"></script>

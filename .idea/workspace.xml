@@ -5,28 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="219d61ec-492e-482c-a8e1-f6692055fdb3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/Styless.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/front/assets/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/front/assets/js/click-scroll.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/front/assets/js/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/front/assets/js/jquery.sticky.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/front/assets/js/tester.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/qr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/status.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/uidcard.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/PdfGeneratorServiceController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/PdfGeneratorService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/Style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/Styless.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/Stylesss.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/budget.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/img/budget.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/FrontController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FrontController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/SessionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/SessionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/TopicsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/TopicsRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SponsorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SponsorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/CardService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CardService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/F_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/F_base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/conference/front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conference/front.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/conference/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conference/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/conference/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conference/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/uidcard/front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uidcard/front.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/emplacement/maps.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/emplacement/maps.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/session/front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/session/front.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/session/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/session/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/sponsor/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sponsor/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/topics/front.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/topics/front.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +36,9 @@
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -204,6 +207,11 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/vendor/symfony/ux-turbo" />
       <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/vendor/nucleos/dompdf-bundle" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -214,25 +222,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;GestionSession&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ahmed/OneDrive/Documents/GitHub/conferaWeb/public/front/assets/js&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "GestionSession",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ahmed/OneDrive/Documents/GitHub/conferaWeb/src/Controller",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ahmed\OneDrive\Documents\GitHub\conferaWeb\src\Controller" />
       <recent name="C:\Users\ahmed\OneDrive\Documents\GitHub\conferaWeb\public\front\assets\js" />
       <recent name="C:\Users\ahmed\OneDrive\Documents\GitHub\conferaWeb\public\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ahmed\OneDrive\Documents\GitHub\conferaWeb\src\Service" />
     </key>
   </component>
   <component name="RunManager">
@@ -252,6 +264,8 @@
       <workItem from="1715009478614" duration="39000" />
       <workItem from="1715016032111" duration="12445000" />
       <workItem from="1715056650452" duration="295000" />
+      <workItem from="1715058455446" duration="3304000" />
+      <workItem from="1715063882636" duration="5020000" />
     </task>
     <servers />
   </component>

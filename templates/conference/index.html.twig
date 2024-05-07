@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
+{% block body %}
+<!--chart start-->
+<div  class="playground" style="justify-content: flex-start">
 
-{% block content %}
+
+    <div class="column">
+
+
+        <div class="Widget" style="margin-top: 20px">
+            <div class="centered-div">
+                {% block content %}
     <form class="searchForm" id="searchForm" action="{{ path('app_conference_index') }}" method="get">
         <input id="searchInput" type="text" name="q" placeholder="Search conferences" value="{{ searchQuery }}">
     </form>
@@ -69,13 +78,17 @@
                 {{ knp_pagination_render(conferences) | raw }}
             </div>
         </div>
-                
-        
+
+        <div class="step-bar">
+        <div class="bottom-buttons">
+            <a  href="{{ path('app_session_index') }}" class="add-button">See Session</a>
+        </div>
         <div class="bottom-buttons">
             <a href="{{ path('app_conference_new') }}" class="add-button">Create new Conference</a>
         </div>
         <div class="bottom-buttons">
             <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Location</a>
+        </div>
         </div>
     </div>
 
@@ -144,4 +157,9 @@
     </script>
 
 
+{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

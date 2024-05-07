@@ -14,17 +14,17 @@
     </form>
 
     <div class="table-wrapper">
-       <table class="my-table" id="SEARCH">
+        <table class="my-table" id="SEARCH">
             <thead>
-                <tr id="trow">
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Numtel</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
+            <tr id="trow">
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Numtel</th>
+                <th >Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
             {% for sponsor in pagination %}
@@ -34,17 +34,30 @@
                     <td>{{ sponsor.email }}</td>
                     <td>{{ sponsor.numtel }}</td>
                     {% if sponsor.status == "accepted" %}
+
                         <td>{{ sponsor.budget }}</td>
+
+
+
                     {% else %}
                         <td> {{sponsor.cause}}</td>
                     {% endif %}
 
                     <td>{{ sponsor.status }}</td>
-                    <td>
+                    <td style="display:flex;">
                         <a class="edit-button" href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">
                             <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
                         </a>
-                      
+                        <a class="edit-button" href="{{ path('qr_code', {'id': sponsor.id}) }}">
+                            <img src="{{ asset('img/InfoIcon.svg') }}" alt="Edit Icon">
+                        </a>
+
+                        {% if sponsor.status == "accepted" %}
+                            <a href="{{ path('app_sponsor_share_on_facebook', {'id': sponsor.id}) }}" class="edit-button" target="_blank" >
+                                f
+                            </a>
+                        {% endif %}
+
                     </td>
                 </tr>
             {% else %}

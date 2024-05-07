@@ -73,7 +73,7 @@ class UserController extends AbstractController
 
         //convert to qr
         $writer = new PngWriter();
-        $qrLink = "http://192.168.1.16:8000/uidcard/push/" . $uuidString;
+        $qrLink = "http://192.168.111.237:8000/uidcard/push/" . $uuidString;
         $qrCode = QrCode::create($qrLink)
             ->setEncoding(new Encoding('UTF-8'))
 
