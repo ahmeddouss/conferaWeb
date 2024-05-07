@@ -1,0 +1,134 @@
+{# templates/registration/register.html.twig #}
+
+{% extends 'U_base.html.twig' %}
+{% block titre %} Sign Up {% endblock %}
+{% block content %}
+
+
+    <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
+        <!--begin::Wrapper-->
+
+        <div class="d-flex flex-lg-row-fluid">
+            <!--begin::Content-->
+            <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
+                <!--begin::Image-->
+                <img class="theme-light-show mx-auto mw-100 w-200px w-lg-400px mb-10 mb-lg-20" src="{{ asset('media/auth/logo.png')}}" alt="" />
+                <!--end::Image-->
+                <!--begin::Title-->
+                <!--end::Title-->
+                <!--begin::Text-->
+                <!--end::Text-->
+            </div>
+            <!--end::Content-->
+        </div>
+
+        <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-8">
+
+
+            <!--begin::Content-->
+            <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
+
+
+
+
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-center flex-column-fluid pb-15 pb-lg-20">
+
+
+                    <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form"
+                          data-kt-redirect-url="../../demo1/dist/authentication/layouts/overlay/sign-in.html"
+                          action="{{ path('app_register') }}" method="post">
+                        <!--begin::Heading-->
+                        <div class="text-center mb-11">
+                            <!--begin::Title-->
+                            <h1 class="text-dark fw-bolder mb-3">Sign Up</h1>
+                            <!--end::Title-->
+                            <!--begin::Subtitle-->
+                            <div class="text-gray-500 fw-semibold fs-6">CONFERA</div>
+                            <!--end::Subtitle-->
+                        </div>
+
+
+
+                        <!-- Fields in the same line -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Prénom'}}) }}
+                            </div>
+                        </div>
+
+                        <!-- Fields on the second line -->
+                        <div class="row g-3 mb-4">
+
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.numtel, {'attr': {'class': 'form-control', 'placeholder': 'Numtel'}}) }}
+                            </div>
+                        </div>
+
+                        <!-- Fields on the third line with minimized height -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.password, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.confirmPassword, {'attr': {'class': 'form-control', 'placeholder': 'Confirm Password'}}) }}
+                            </div>
+                        </div>
+                        <!-- Fields on the third line with minimized height -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.role, {'attr': {'class': 'form-control', 'placeholder': 'Numtel'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(registrationForm.username, {'attr': {'class': 'form-control', 'placeholder': 'Username'}}) }}
+                            </div>
+                            <div></div>
+                            <div class="col-md-4">
+                            </div>
+
+                        </div>
+
+                        {{ form_widget(registrationForm._token) }}
+
+                        <!-- Submit Button -->
+                        <div class="d-grid mb-4">
+                            {{ form_widget(registrationForm.register, {'attr': {'class': 'btn btn-primary'}}) }}
+                        </div>
+
+                        <!--begin::Sign up-->
+                        <div class="text-gray-500 text-center fw-semibold fs-6">
+                            Already have an Account?
+                            <a href="{{ path('app_login') }}" class="link-primary fw-semibold">Sign in</a>
+                        </div>
+                        <!--end::Sign up-->
+                    </form>
+                    <!--end::Form-->
+
+                </div>
+                <!--end::Wrapper-->
+                <!--begin::Footer-->
+                <div class="w-lg-500px d-flex flex-stack">
+
+
+                </div>
+                <!--end::Footer-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+
+    </div>
+    </body>
+
+{% endblock %}
+{% block js %}
+
+    <script src="{{ asset('js/custom/authentication/sign-up/general.js') }}"></script>
+{% endblock %}

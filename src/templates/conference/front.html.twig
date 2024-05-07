@@ -1,0 +1,37 @@
+{% extends 'F_base.html.twig' %}
+
+
+
+{% block conference %}
+
+  <section class="articles">
+
+
+    {% for conference in conferences %}
+        <article  id={{conference.id}}>
+            <div class="article-wrapper">
+              <figure>
+                <img  src="{{ asset('images/' ~ conference.image) }}">
+              </figure>
+              <div class="article-body">
+                <h2>{{ conference.nom }}</h2>
+                <p>
+                    {{ conference.date ? conference.date|date('Y-m-d') : '' }}
+                </p>
+                <p>
+                    Location :{{ conference.emplacement.gouvernourat }}, {{ conference.emplacement.ville }}, {{ conference.emplacement.label }}
+                </p>
+                <p>
+                Private : {{ conference.typeconf ? 'Yes' : 'No' }}
+                </p>
+                  
+                </a>
+              </div>
+            </div>
+          </article>
+
+     {% endfor %}
+ 
+
+
+{% endblock %}

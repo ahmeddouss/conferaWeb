@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsors{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top:500px;">Sponsor Dashboard</h1>
+
+    {# Search Form #}
+    <form action="{{ path('app_sponsor_index') }}" method="get" class="form-inline">
+        <div class="form-group d-flex">
+            <input id="searchInput" type="text" class="form-control" name="query" placeholder="Search...">
+            <button type="submit" class="add-button" style="background-color:#36304A">Search</button>
+        </div>
+    </form>
+
+    <div class="table-wrapper">
+       <table class="my-table" id="SEARCH">
+            <thead>
+                <tr id="trow">
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Numtel</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for sponsor in pagination %}
+                <tr data-id="{{ sponsor.id }}" data-nom="{{ sponsor.nom }}" data-email="{{ sponsor.email }}" data-numtel="{{ sponsor.numtel }}" data-status="{{ sponsor.status }}">
+                    <td>{{ sponsor.id }}</td>
+                    <td>{{ sponsor.nom }}</td>
+                    <td>{{ sponsor.email }}</td>
+                    <td>{{ sponsor.numtel }}</td>
+                    {% if sponsor.status == "accepted" %}
+                        <td>{{ sponsor.budget }}</td>
+                    {% else %}
+                        <td> {{sponsor.cause}}</td>
+                    {% endif %}
+
+                    <td>{{ sponsor.status }}</td>
+                    <td>
+                        <a class="edit-button" href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+                        </a>
+                      
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination" style="margin-top:20px">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <div class="buttons">
+        <a href="{{ path('app_sponsor_index') }}" class="add-button">Show all</a>
+        <a href="{{ path('app_sponsor_index', {'status': 'accepted'}) }}" class="add-button" style="background-color:green;">Show only accepted</a>
+        <a href="{{ path('app_sponsor_index', {'status': 'rejected'}) }}" class="add-button" style="background-color:red;">Show only rejected</a>
+        <a href="{{ path('app_sponsor_new') }}" class="add-button">Create new</a>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="pie-chart-container">
+        <canvas id="pieChart"></canvas>
+    </div>
+
+    <!-- Accepted Sponsors Budget Sum -->
+    <div class="budget-sum text-center" >
+        <h2 style="color:#36304A">Total Budget of Accepted Sponsors</h2>
+        <h5>{{ acceptedSponsorsBudgetSum }}</h5>
+    </div>
+
+
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Pie Chart Data
+        var pieData = {
+            labels: ['Accepted', 'Rejected'],
+            datasets: [{
+                data: [{{ acceptedSponsorsCount }}, {{ rejectedSponsorsCount }}],
+                backgroundColor: ['#0E46A3', '#FC4100']
+            }]
+        };
+
+        // Draw Pie Chart
+        var pieChartCtx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(pieChartCtx, {
+            type: 'pie',
+            data: pieData
+        });
+    </script>
+{% endblock %}

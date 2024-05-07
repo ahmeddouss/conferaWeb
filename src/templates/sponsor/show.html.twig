@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsor{% endblock %}
+
+{% block content %}
+    <h1>Sponsor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sponsor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ sponsor.nom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ sponsor.email }}</td>
+            </tr>
+            <tr>
+                <th>Numtel</th>
+                <td>{{ sponsor.numtel }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ sponsor.status }}</td>
+            </tr>
+            <tr>
+                <th>Budget</th>
+                <td>{{ sponsor.budget }}</td>
+            </tr>
+            <tr>
+                <th>Cause</th>
+                <td>{{ sponsor.cause }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="back-button" href="{{ path('app_sponsor_index') }}">back to list</a>
+
+    <a class="add-button" href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">edit</a>
+
+    {{ include('sponsor/_delete_form.html.twig') }}
+{% endblock %}

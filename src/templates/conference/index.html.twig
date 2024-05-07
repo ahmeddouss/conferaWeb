@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container py-5">
+        <h1 class="mb-4">Conferences List</h1>
+
+        <div class="table-wrapper">
+            <table class="my-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Budget</th>
+                        <th scope="col">Pivate</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for conference in conferences %}
+                        <tr>
+                        <tr onclick="location.href='{{ path('app_conference_show', {'id': conference.id}) }}';" style="cursor:pointer;">
+                            <td>{{ conference.nom }}</td>
+                            <td>{{ conference.date ? conference.date|date('Y-m-d') : '  ' }}</td>
+                            <td>{{ conference.sujet }}</td>
+                            <td>{{ conference.budget }}</td>
+                            <td>{{ conference.typeconf ? 'Yes' : 'No' }}</td>
+                            <td>
+                                {% if conference.image %}
+                                    <img src="{{ asset('images/' ~ conference.image) }}" style="max-width: 80px; max-height: 80px;" alt="Conference Image">
+                                {% else %}
+                                    No image available
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="edit-button" href="{{ path('app_conference_edit', {'id': conference.id}) }}">
+
+                            <img src="{{ asset('img/editIcon.svg') }}" alt="Edit Icon">
+
+                    </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">No Conferences found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+         <div class="bottom-buttons">
+        
+
+        <a href="{{ path('app_conference_new') }}" class="add-button">Create new Conference</a>
+    </div>
+<div class="bottom-buttons">
+            <a href="{{ path('app_emplacement_new') }}" class="add-button">Create new Emplacement</a>
+        </div>
+        
+    </div>
+{% endblock %}

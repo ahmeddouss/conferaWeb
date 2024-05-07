@@ -1,0 +1,58 @@
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    <table>
+        <tr>
+            <td>{{ form_label(form.nom, "Nom") }}</td>
+            <td>
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                <span class="error-message">{{ form_errors(form.nom) }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.date, "Date") }}</td>
+            <td>
+                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                <span class="error-message">{{ form_errors(form.date) }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.sujet, "Sujet") }}</td>
+            <td>
+                {{ form_widget(form.sujet, {'attr': {'class': 'form-control'}}) }}
+                <span class="error-message">{{ form_errors(form.sujet) }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.budget, "Budget") }}</td>
+            <td>
+                {{ form_widget(form.budget, {'attr': {'class': 'form-control'}}) }}
+                <span class="error-message">{{ form_errors(form.budget) }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.typeconf, "Type de conférence") }}</td>
+            <td>
+                {{ form_widget(form.typeconf, {'attr': {'class': 'form-control'}}) }}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.photo, "Photo") }}</td>
+            <td>
+                {{ form_widget(form.photo, {'attr': {'class': 'form-control-file'}}) }}
+            </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.emplacement, "Emplacement") }}</td>
+            <td>
+                {{ form_widget(form.emplacement, {'attr': {'class': 'form-control'}}) }}
+            </td>
+        </tr>
+    </table>
+
+    <div style="text-align: right;">
+        <button type="submit" class="add-button">Create</button>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
