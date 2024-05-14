@@ -16,6 +16,9 @@
         "dompdf/dompdf": "^2.0",
         "endroid/qr-code": "^5.0",
         "knplabs/knp-paginator-bundle": "^6.3",
+        "knpuniversity/oauth2-client-bundle": "^2.18",
+        "league/oauth2-google": "^4.0",
+        "lexik/jwt-authentication-bundle": "^2.18",
         "mercuryseries/flashy-bundle": "*",
         "nucleos/dompdf-bundle": "^4.1",
         "nyholm/psr7": "^1.8",
@@ -35,7 +38,7 @@
         "symfony/google-mailer": "6.4.*",
         "symfony/http-client": "6.4.*",
         "symfony/intl": "6.4.*",
-        "symfony/mailer": "6.4.*",
+        "symfony/mailer": "5.4.*",
         "symfony/mercure-bundle": "*",
         "symfony/mime": "6.4.*",
         "symfony/monolog-bundle": "^3.0",
@@ -58,7 +61,8 @@
         "symfony/yaml": "6.4.*",
         "tattali/calendar-bundle": "*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "victor-prdh/recaptcha-bundle": "^1.8"
     },
     "config": {
         "allow-plugins": {
