@@ -2,10 +2,10 @@
 {% block title %}Live Session{% endblock %}
 
 {% block content %}
-<div class="container"  >
-    <h1 class="clock" id="clock"></h1>
-    <div class="red-live-circle" ></div>
-</div>
+    <div class="container"  >
+        <h1 class="clock" id="clock"></h1>
+        <div class="red-live-circle" ></div>
+    </div>
 
     <p class="date">Date:    <a style="font-weight: 300" id="currentDate"></a></p>
 
@@ -48,7 +48,7 @@
         <tr>
             <th>Current Conference</th>
             {% if conference is not none %}
-            <td>{{ conference.nom }}</td>
+                <td>{{ conference.nom }}</td>
             {% else %}
                 <td>---</td>
             {% endif %}
@@ -109,7 +109,7 @@
 
             </div>
 
-            </div>
+        </div>
     </div>
 
 
@@ -141,7 +141,7 @@
                 document.getElementById('presenceNbr').innerText = newValue;
                 document.getElementById('list').insertAdjacentHTML('afterbegin', ' <div id="presence" class="PresenceIn" style="background-color: #E5475E">' +
                     '<img alt="status" src="{{ asset('img/status.svg') }}" style="width: 35px; height: 35px; margin-right: 30px;">' +
-'<div class="Contend-presence" style="width:400px">'+
+                    '<div class="Contend-presence" style="width:400px">'+
                     '<div  style="display: flex; justify-content: space-between;width:250px ;  align-items: center;">' + // Added double quote here
 
                     '<p class ="Contend-presence-text">' + JSON.parse(event.data).username + ' </p>' +
@@ -157,8 +157,6 @@
                     '</div>');
 
 
-            }else {
-                window.location.href = "{{ path('app_uidcard_new') }}";
             }
 
 

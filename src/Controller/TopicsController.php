@@ -7,6 +7,7 @@ use App\Entity\Topics;
 use App\Form\TopicsType;
 use App\Repository\TopicsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ class TopicsController extends AbstractController
 
 
     #[Route('/{id}/new', name: 'app_topics_new', methods: ['GET', 'POST'])]
-    public function newby(Request $request,Session $session, EntityManagerInterface $entityManager): Response
+    public function newby(Request $request,TopicsRepository $topicsRepository, Session $session, EntityManagerInterface $entityManager): Response
     {
         $topic = new Topics();
         $topic->setIdSession($session); // Assuming setIdSession() is the method to set idsession in Topics entity
@@ -41,20 +42,23 @@ class TopicsController extends AbstractController
             $entityManager->persist($topic);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_topics_new', ['id' => $session->getId()]);
         }
-
+        $topics = $topicsRepository->findByExampleField($session->getId());
         return $this->render('topics/new.html.twig', [
             'topic' => $topic,
+            'topics' => $topics,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_topics_show', methods: ['GET'])]
-    public function show(Topics $topic): Response
+    public function show(Topics $topic,TopicsRepository $topicsRepository): Response
     {
+        $topics = $topicsRepository->findByExampleField($topic->getIdsession());
         return $this->render('topics/show.html.twig', [
             'topic' => $topic,
+            'topics' => $topics
         ]);
     }
 
@@ -77,13 +81,16 @@ class TopicsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_topics_delete', methods: ['POST'])]
-    public function delete(Request $request, Topics $topic, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Topics $topic, EntityManagerInterface $entityManager,TopicsRepository $topicsRepository,FlashyNotifier $flashyNotifier): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->getPayload()->get('_token'))) {
+        $topics = $topicsRepository->findByExampleField($topic->getIdsession());
+        if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->getPayload()->get('_token'))&&(count($topics)>1)) {
             $entityManager->remove($topic);
             $entityManager->flush();
+            return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
         }
+        $flashyNotifier->error("Session need to have at least one Topic you can edit this instead");
 
-        return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_topics_edit', ['id' => $topic->getId()]);
     }
 }

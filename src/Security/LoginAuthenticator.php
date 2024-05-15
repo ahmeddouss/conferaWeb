@@ -54,7 +54,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
 
             // Redirect to the 'home' route for other roles
-            return new RedirectResponse($this->urlGenerator->generate('user_profile'));
+            return new RedirectResponse($this->urlGenerator->generate('app_conference_index'));
         }
 
         // If the user is not authenticated, you can handle it as needed

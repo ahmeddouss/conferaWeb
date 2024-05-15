@@ -14,7 +14,7 @@ class CardService
     public function addCardUid(): string
     {
         // Call the testPin method of the TestPinService
-        $url = 'http://192.168.111.134/rfid';
+        $url = 'http://192.168.1.18/rfid';
 
         // Create a new HttpClient instance
         $httpClient = HttpClient::create();
