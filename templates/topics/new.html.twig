@@ -3,9 +3,13 @@
 {% block title %}New Topics{% endblock %}
 
 {% block content %}
-    <h1>Create new Topics</h1>
+    <h1>Create new Topics ({{ topics | length }})</h1>
 
     {{ include('topics/_form.html.twig') }}
 
-    <a class="back-button" href="{{ path('app_session_index') }}">Back to Session list</a>
+    {% if topics | length > 0 %}
+        <a class="back-button" href="{{ path('app_session_index') }}">Back to Session list</a>
+    {% else %}
+        <div class="error-message" >Each Session need To have at least one Topic</div>
+    {% endif %}
 {% endblock %}

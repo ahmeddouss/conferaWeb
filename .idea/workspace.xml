@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="219d61ec-492e-482c-a8e1-f6692055fdb3" name="Changes" comment="final" />
+    <list default="true" id="219d61ec-492e-482c-a8e1-f6692055fdb3" name="Changes" comment="final">
+      <change afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_07_05_2024_6_42_AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SessionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TopicsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TopicsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UidcardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UidcardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/LoginAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/CardService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CardService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/topics/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/topics/_delete_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/topics/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/topics/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/topics/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/topics/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/topics/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/topics/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/uidcard/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uidcard/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/uidcard/live.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uidcard/live.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/uidcard/presence.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uidcard/presence.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +35,11 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
     <option name="UPDATE_TYPE" value="REBASE" />
@@ -227,30 +250,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zayat/PhpstormProjects/conferaWeb/templates&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "GestionSession",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/ahmed/OneDrive/Documents/GitHub/conferaWebb/src/Controller",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ahmed\OneDrive\Documents\GitHub\conferaWebb\src\Controller" />
       <recent name="C:\Users\zayat\PhpstormProjects\conferaWeb\templates" />
       <recent name="C:\Users\zayat\PhpstormProjects\conferaWeb\public" />
       <recent name="C:\Users\zayat\PhpstormProjects\conferaWeb\public\js" />
       <recent name="C:\Users\zayat\PhpstormProjects\conferaWeb\public\images" />
-      <recent name="C:\Users\zayat\PhpstormProjects\conferaWeb\public\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ahmed\OneDrive\Documents\GitHub\conferaWeb\src\Service" />
@@ -261,14 +284,6 @@
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PS-241.14494.237" />
-        <option value="bundled-php-predefined-ba97393d7c68-8f0632a2a215-com.jetbrains.php.sharedIndexes-PS-241.14494.237" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -285,6 +300,8 @@
       <workItem from="1715063882636" duration="6754000" />
       <workItem from="1715466911470" duration="1296000" />
       <workItem from="1715688011863" duration="14790000" />
+      <workItem from="1715756754204" duration="1365000" />
+      <workItem from="1715758714623" duration="5957000" />
     </task>
     <task id="LOCAL-00001" summary="final">
       <option name="closed" value="true" />
