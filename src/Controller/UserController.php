@@ -32,7 +32,7 @@ use Endroid\QrCode\Logo\Logo;
 
 use Endroid\QrCode\Label\Font\NotoSans;
 
-#[Route('/user')]
+#[Route('/user2')]
 class UserController extends AbstractController
 {
 

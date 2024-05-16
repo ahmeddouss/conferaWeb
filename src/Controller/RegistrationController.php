@@ -104,6 +104,8 @@ class RegistrationController extends AbstractController
         // Retrieve the authenticated user
         $user = $security->getUser();
 
+
+
         // Ensure the user is authenticated
         if (!$user instanceof User) {
             throw $this->createAccessDeniedException('User is not authenticated.');
