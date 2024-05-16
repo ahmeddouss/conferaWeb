@@ -23,10 +23,10 @@
                  <li><a href="{{ path('app_dash_index') }}"><img src="{{ asset('img/budget.svg') }}" alt="budget"> </a></li>
 
 
-                <li><a href="shortcodes.html"><img src="{{ asset('img/ProfileIcon.svg') }}" alt="Shortcodes"> </a></li>
+                <li><a href="{{ path('user_update') }}"><img src="{{ asset('img/ProfileIcon.svg') }}" alt="Shortcodes"> </a></li>
             </nav>
         </nav>
-        <button class="logout-button"><img src="{{ asset('img/LogoutIcon.svg') }}" alt="Icon"></button>
+        <a href="{{ path('app_logout') }}"> <button class="logout-button"><img src="{{ asset('img/LogoutIcon.svg') }}" alt="Icon"></button></a>
 
 
     </div>
