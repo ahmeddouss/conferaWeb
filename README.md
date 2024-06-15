@@ -51,6 +51,9 @@ $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; $env:MERCUR
 ### Liste des sessions:
 ![ghjfghj](https://github.com/ahmeddouss/conferaWeb/assets/118319834/4e8bd229-3ab6-4208-91cd-1914fd9d8fef)
 - Modifier, ajouter ou supprimer une Session.
+- 
+- ### Charte de présence:
+![ezgif-1-cfb61ec84a](https://github.com/ahmeddouss/conferaWeb/assets/118319834/e4572b25-180f-4769-9675-0a17fb9aac54)
 
 ### Liste des topics
 ![jkl;jkl;](https://github.com/ahmeddouss/conferaWeb/assets/118319834/b7a7b274-733d-419a-b103-f863740db7ff)
@@ -69,7 +72,8 @@ $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; $env:MERCUR
 
 ## Front Office
 ### List des places diponible
-![gfh](https://github.com/ahmeddouss/conferaWeb/assets/118319834/65e48b34-45e2-4292-bb2b-aa1978077542)
+![ezgif-1-95e646a940](https://github.com/ahmeddouss/conferaWeb/assets/118319834/aa08a7ab-6d36-4431-b01b-819df482cc72)
+
 - Chaque utilisateur participant avec mise à jour en temps réel.
 - Api location et météo pour s'avoir l'emplacement et le météo actuel
 
