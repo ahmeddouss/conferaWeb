@@ -16,14 +16,14 @@ Confera est une application complète pour mobile, desktop et web, conçue pour 
 
 ## Jupyter
 
-Jupyter est utilisé pour le code de machine learning afin de traiter nos statistiques de présence et d'évaluer plus efficacement nos sessions.
+Jupyter est utilisé pour le [code de machine](machine_learning-stat.ipynb) learning afin de traiter nos statistiques de présence et d'évaluer plus efficacement nos sessions.
 
 ![chart (8)](https://github.com/ahmeddouss/conferaWeb/assets/118319834/340b7d82-ae16-4e05-9391-03047e4bf1c3)
 
 
 ## Arduino IDE
 
-Arduino IDE est utilisé pour le code ESP32 afin d'obtenir l'ID utilisateur lorsqu'il entre dans une session.
+Arduino IDE est utilisé pour le [code ESP32](esp32) afin d'obtenir l'ID utilisateur lorsqu'il entre dans une session.
 
 ## Symfony
 
