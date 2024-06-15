@@ -16,7 +16,7 @@ Confera est une application complète pour mobile, desktop et web, conçue pour 
 
 ## Jupyter
 
-Jupyter est utilisé pour le [code de machine](machine_learning-stat.ipynb) learning afin de traiter nos statistiques de présence et d'évaluer plus efficacement nos sessions.
+Jupyter est utilisé pour le [code de machine learning](machine_learning-stat.ipynb) afin de traiter nos statistiques de présence et d'évaluer plus efficacement nos sessions.
 
 ![chart (8)](https://github.com/ahmeddouss/conferaWeb/assets/118319834/340b7d82-ae16-4e05-9391-03047e4bf1c3)
 
