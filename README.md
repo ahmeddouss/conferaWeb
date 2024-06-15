@@ -2,14 +2,6 @@
 
 Confera est une application complète pour mobile, desktop et web, conçue pour gérer les conférences et répondre aux besoins spécifiques des entreprises. Elle offre une multitude de fonctionnalités permettant de créer et de gérer des conférences ainsi que leurs sessions de manière efficace et organisée.
 
-# Équipe de gestion
-
-- **Gestion des utilisateurs :** [Hamza Zayeti](https://github.com/zayatihamza)
-- **Gestion des sessions et de la présence :** [Ahmed Douss](https://github.com/ahmeddouss)
-- **Gestion des conférences :** [Melek Massouadi](https://github.com/LukaTN) 
-- **Gestion des sponsor :** [Ali Triki](https://github.com/Alilovez)
-- **Gestion des Budgets :** [Amen allah Mrabet](https://github.com/AmenAllahMrabet)
-- **Gestion des evaluations :** [Jean Perial](https://github.com/AmenAllahMrabet)
 ---
 
 # Pré-requis
@@ -81,4 +73,14 @@ $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; $env:MERCUR
 - Chaque utilisateur participant avec mise à jour en temps réel.
 - Api location et météo pour s'avoir l'emplacement et le météo actuel
 
+---
+
+# Équipe de gestion
+
+- **Gestion des utilisateurs :** [Hamza Zayeti](https://github.com/zayatihamza)
+- **Gestion des sessions et de la présence :** [Ahmed Douss](https://github.com/ahmeddouss)
+- **Gestion des conférences :** [Melek Massouadi](https://github.com/LukaTN) 
+- **Gestion des sponsor :** [Ali Triki](https://github.com/Alilovez)
+- **Gestion des Budgets :** [Amen allah Mrabet](https://github.com/AmenAllahMrabet)
+- **Gestion des evaluations :** [Jean Perial](https://github.com/AmenAllahMrabet)
 
