@@ -1,6 +1,6 @@
 # À propos de Confera
 
-Confera est une application complète pour mobile, desktop et web, conçue pour gérer les conférences et répondre aux besoins spécifiques des entreprises. Elle offre une multitude de fonctionnalités permettant de créer et de gérer des conférences ainsi que leurs sessions de manière efficace et organisée.
+Confera est une application complète pour mobile, [desktop](https://github.com/LukaTN/PIDEV3A29) et web, conçue pour gérer les conférences et répondre aux besoins spécifiques des entreprises. Elle offre une multitude de fonctionnalités permettant de créer et de gérer des conférences ainsi que leurs sessions de manière efficace et organisée.
 
 ---
 
